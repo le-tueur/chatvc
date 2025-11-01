@@ -120,6 +120,16 @@
       "timestamp": 1762038958543,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "50387fd4-8dd4-4e7a-ad58-713c73bf15c4",
+      "userId": "a0db9fcc-1666-4ecb-ac91-0587e51fb83a",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Le bot ?",
+      "timestamp": 1762039119219,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
