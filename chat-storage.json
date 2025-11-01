@@ -80,17 +80,6 @@
       "timestamp": 1762038799316,
       "status": "approved",
       "type": "normal"
-    },
-    {
-      "id": "1795b760-7716-4e35-b263-41627b300130",
-      "userId": "8aa0cc41-e203-4950-a706-d233fa5e789a",
-      "username": "pronBOT",
-      "role": "pronBOT",
-      "content": "test : suppression dans 10 secondes",
-      "timestamp": 1762038814481,
-      "status": "approved",
-      "type": "flash",
-      "flashDuration": 10
     }
   ],
   "mutedUsers": [],
