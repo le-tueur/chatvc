@@ -6,6 +6,10 @@ import type {
   BlockedWord,
 } from "@shared/schema";
 import { randomUUID } from "crypto";
+import fs from "fs";
+import path from "path";
+
+const FILE_PATH = path.resolve("./chat-storage.json");
 
 export interface IStorage {
   users: Map<string, User>;
@@ -66,8 +70,11 @@ export class MemStorage implements IStorage {
     this.mutedUsers = new Map();
     this.blockedWords = new Map();
     this.typingUsers = new Map();
+
+    this.loadFromDisk(); // 🟢 Charger les données sauvegardées au démarrage
   }
 
+  // ------------------- USERS -------------------
   getUserById(id: string): User | undefined {
     return this.users.get(id);
   }
@@ -93,8 +100,10 @@ export class MemStorage implements IStorage {
     }
   }
 
+  // ------------------- MESSAGES -------------------
   addMessage(message: Message): void {
     this.messages.push(message);
+    this.saveToDisk();
   }
 
   getMessages(): Message[] {
@@ -117,25 +126,31 @@ export class MemStorage implements IStorage {
     const index = this.messages.findIndex((m) => m.id === messageId);
     if (index !== -1) {
       this.messages[index] = { ...this.messages[index], ...updates };
+      this.saveToDisk();
     }
   }
 
   deleteMessage(messageId: string): void {
     this.messages = this.messages.filter((m) => m.id !== messageId);
+    this.saveToDisk();
   }
 
   clearMessages(): void {
     this.messages = [];
+    this.saveToDisk();
   }
 
+  // ------------------- CONFIG -------------------
   getConfig(): ChatConfig {
     return this.config;
   }
 
   updateConfig(updates: Partial<ChatConfig>): void {
     this.config = { ...this.config, ...updates };
+    this.saveToDisk();
   }
 
+  // ------------------- MUTES -------------------
   addMutedUser(mutedUser: MutedUser): void {
     this.mutedUsers.set(mutedUser.username, mutedUser);
     const user = this.getUserByUsername(mutedUser.username);
@@ -145,6 +160,7 @@ export class MemStorage implements IStorage {
         mutedUntil: mutedUser.mutedUntil,
       });
     }
+    this.saveToDisk();
   }
 
   removeMutedUser(username: string): void {
@@ -156,6 +172,7 @@ export class MemStorage implements IStorage {
         mutedUntil: undefined,
       });
     }
+    this.saveToDisk();
   }
 
   getMutedUsers(): MutedUser[] {
@@ -182,15 +199,18 @@ export class MemStorage implements IStorage {
     return true;
   }
 
+  // ------------------- BLOCKED WORDS -------------------
   addBlockedWord(word: string): void {
     this.blockedWords.set(word.toLowerCase(), {
       word: word.toLowerCase(),
       addedAt: Date.now(),
     });
+    this.saveToDisk();
   }
 
   removeBlockedWord(word: string): void {
     this.blockedWords.delete(word.toLowerCase());
+    this.saveToDisk();
   }
 
   getBlockedWords(): BlockedWord[] {
@@ -204,6 +224,7 @@ export class MemStorage implements IStorage {
     );
   }
 
+  // ------------------- TYPING -------------------
   setUserTyping(username: string): void {
     this.typingUsers.set(username, Date.now());
   }
@@ -226,6 +247,43 @@ export class MemStorage implements IStorage {
     
     return activeTyping;
   }
+
+  // ------------------- PERSISTENCE -------------------
+  private saveToDisk(): void {
+    try {
+      const data = {
+        messages: this.messages,
+        config: this.config,
+        mutedUsers: Array.from(this.mutedUsers.values()),
+        blockedWords: Array.from(this.blockedWords.values()),
+      };
+      fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
+    } catch (err) {
+      console.error("Erreur sauvegarde chat-storage.json :", err);
+    }
+  }
+
+  private loadFromDisk(): void {
+    if (fs.existsSync(FILE_PATH)) {
+      try {
+        const data = JSON.parse(fs.readFileSync(FILE_PATH, "utf-8"));
+        this.messages = data.messages || [];
+        this.config = data.config || this.config;
+        this.mutedUsers = new Map(
+          (data.mutedUsers || []).map((u: any) => [u.username, u])
+        );
+        this.blockedWords = new Map(
+          (data.blockedWords || []).map((b: any) => [b.word.toLowerCase(), b])
+        );
+        console.log(
+          `✅ ${this.messages.length} messages chargés depuis chat-storage.json`
+        );
+      } catch (err) {
+        console.error("Erreur lecture chat-storage.json :", err);
+      }
+    }
+  }
 }
 
+// ------------------- INSTANCE GLOBALE -------------------
 export const storage = new MemStorage();
