@@ -1,6 +1,11 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import type { User, Message, ChatConfig, MutedUser, BlockedWord } from "@shared/schema";
+
+// Remplacer __dirname en ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const FILE_PATH = path.join(__dirname, "chat.json");
 
