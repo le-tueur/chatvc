@@ -80,6 +80,16 @@
       "timestamp": 1762038900966,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "93d89893-806a-4656-ad15-e1460aa219ce",
+      "userId": "4adbadb1-d9ad-43e4-9a07-73373083c88d",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Quoi encore ?",
+      "timestamp": 1762038907689,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
