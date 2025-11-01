@@ -90,6 +90,16 @@
       "timestamp": 1762038838549,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "56dc07c3-bb37-4b3f-ada1-a74af77b43f5",
+      "userId": "8aa0cc41-e203-4950-a706-d233fa5e789a",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "tous les messages seront supprimée",
+      "timestamp": 1762038847146,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
