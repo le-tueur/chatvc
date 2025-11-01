@@ -1,0 +1,11 @@
+{
+  "users": [],
+  "messages": [],
+  "mutedUsers": [],
+  "blockedWords": [],
+  "config": {
+    "enabled": true,
+    "cooldown": 0,
+    "simulationMode": false
+  }
+}
