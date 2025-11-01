@@ -244,6 +244,9 @@ function handleSendMessage(
     return;
   }
 
+  const config = storage.getConfig();
+  const autoApprove = ws.role === "pronBOT" || config.directChatEnabled;
+
 const newMessage: Message = {
   id: randomUUID(),
   userId: ws.userId,
@@ -251,13 +254,13 @@ const newMessage: Message = {
   role: ws.role! as UserRole,  // ✅ Cast explicite
   content: content.trim(),
   timestamp: Date.now(),
-  status: ws.role === "pronBOT" ? "approved" : "pending",
+  status: autoApprove ? "approved" : "pending",
   type: "normal",
   };
 
   storage.addMessage(newMessage);
 
-  if (ws.role === "pronBOT") {
+  if (autoApprove) {
     broadcast(wss, { type: "message", message: newMessage });
   } else {
     ws.send(JSON.stringify({ type: "pending_message", message: newMessage }));
@@ -417,6 +420,10 @@ function handleUpdateConfig(
   if (config.simulationMode !== undefined) {
     updates.simulationMode = config.simulationMode;
   }
+  
+  if (config.directChatEnabled !== undefined) {
+    updates.directChatEnabled = config.directChatEnabled;
+  }
 
   storage.updateConfig(updates);
   broadcast(wss, { type: "config_update", config: storage.getConfig() });
@@ -567,23 +574,55 @@ async function handleExportHistory(ws: WebSocketClient, message: any) {
       })
     );
   } else if (format === "text") {
-    // Export as formatted text
+    // Export as formatted text with detailed information
     const messages = storage.getMessages();
-    const textData = messages
+    const config = storage.getConfig();
+    const exportDate = new Date();
+    
+    const header = [
+      "═══════════════════════════════════════════════════════════════",
+      "         EXPORT DE L'HISTORIQUE DU CHAT - RAPPORT DÉTAILLÉ",
+      "═══════════════════════════════════════════════════════════════",
+      `Date d'export: ${exportDate.toLocaleString('fr-FR')}`,
+      `Total de messages: ${messages.filter(m => m.status === "approved" || m.type === "event" || m.type === "flash").length}`,
+      `Statut du chat: ${config.enabled ? 'Activé' : 'Désactivé'}`,
+      `Mode chat direct: ${config.directChatEnabled ? 'Activé' : 'Désactivé'}`,
+      `Cooldown: ${config.cooldown} secondes`,
+      "═══════════════════════════════════════════════════════════════",
+      "",
+    ].join("\n");
+    
+    const messageLines = messages
       .filter(m => m.status === "approved" || m.type === "event" || m.type === "flash")
       .map((m) => {
         const date = new Date(m.timestamp);
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        return `[${hours}:${minutes}] ${m.username}: ${m.content}`;
+        const dateStr = date.toLocaleDateString('fr-FR');
+        const timeStr = date.toLocaleTimeString('fr-FR');
+        const roleLabel = m.role === "pronBOT" ? "[ADMIN]" : `[${m.role}]`;
+        const typeLabel = m.type === "event" ? "[ÉVÉNEMENT]" : m.type === "flash" ? "[FLASH]" : "";
+        const statusLabel = m.forcePublished ? "[FORCÉ]" : "";
+        
+        return `${dateStr} ${timeStr} ${roleLabel}${typeLabel}${statusLabel} ${m.username}: ${m.content}`;
       })
       .join("\n");
+    
+    const footer = [
+      "",
+      "═══════════════════════════════════════════════════════════════",
+      "                    FIN DE L'EXPORT",
+      "═══════════════════════════════════════════════════════════════",
+    ].join("\n");
+    
+    const textData = header + messageLines + footer;
+    
+    const filename = `chat-export-${exportDate.toISOString().split('T')[0]}.txt`;
+    
     ws.send(
       JSON.stringify({
         type: "export_data",
         format: "text",
         data: textData,
-        filename: `chat.txt`,
+        filename,
       })
     );
   }

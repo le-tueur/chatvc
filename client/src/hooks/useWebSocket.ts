@@ -22,7 +22,7 @@ export function useWebSocket(username: string | null, role: string | null) {
   const [chatState, setChatState] = useState<ChatState>({
     messages: [],
     users: [],
-    config: { enabled: true, cooldown: 0, simulationMode: false },
+    config: { enabled: true, cooldown: 0, simulationMode: false, directChatEnabled: false },
     mutedUsers: [],
     blockedWords: [],
     typingUsers: [],
@@ -167,6 +167,14 @@ export function useWebSocket(username: string | null, role: string | null) {
         case "animation_trigger":
           // Handle animation triggers (flash, warning badge, etc.)
           break;
+
+        case "message_deleted":
+          setChatState(prev => ({
+            ...prev,
+            messages: prev.messages.filter(m => m.id !== data.messageId),
+            pendingMessages: prev.pendingMessages.filter(m => m.id !== data.messageId),
+          }));
+          break;
       }
     };
 
@@ -300,6 +308,12 @@ export function useWebSocket(username: string | null, role: string | null) {
     }
   }, []);
 
+  const deleteMessage = useCallback((messageId: string) => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify({ type: "delete_message", messageId }));
+    }
+  }, []);
+
   return {
     isConnected,
     chatState,
@@ -321,5 +335,6 @@ export function useWebSocket(username: string | null, role: string | null) {
     resetTimers,
     triggerAnimation,
     exportHistory,
+    deleteMessage,
   };
 }

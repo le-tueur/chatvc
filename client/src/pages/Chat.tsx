@@ -44,6 +44,7 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
     resetTimers,
     triggerAnimation,
     exportHistory,
+    deleteMessage,
   } = useWebSocket(username, role);
 
   return (
@@ -166,6 +167,7 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
                 messages={chatState.messages}
                 currentUsername={username}
                 currentRole={role}
+                onDeleteMessage={deleteMessage}
               />
               <TypingIndicator typingUsers={chatState.typingUsers} currentUsername={username} />
               <MessageInput
@@ -182,6 +184,7 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
               messages={chatState.messages}
               currentUsername={username}
               currentRole={role}
+              onDeleteMessage={deleteMessage}
             />
             <TypingIndicator typingUsers={chatState.typingUsers} currentUsername={username} />
             <MessageInput

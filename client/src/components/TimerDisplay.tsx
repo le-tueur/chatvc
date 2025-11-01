@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import { Clock, X } from "lucide-react";
+import { Clock, X, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface TimerDisplayProps {
@@ -28,11 +28,42 @@ export default function TimerDisplay({ timerEndTime }: TimerDisplayProps) {
     return () => clearInterval(interval);
   }, [timerEndTime]);
 
-  if (!timerEndTime || dismissed || timeRemaining === 0) return null;
+  if (!timerEndTime || timeRemaining === 0) return null;
 
   const minutes = Math.floor(timeRemaining / 60000);
   const seconds = Math.floor((timeRemaining % 60000) / 1000);
   const isWarning = minutes < 5;
+  const isCritical = minutes < 1;
+
+  if (isCritical && !dismissed) {
+    return (
+      <div
+        className="w-full bg-destructive text-destructive-foreground py-4 px-6 shadow-lg animate-pulse-glow z-50"
+        data-testid="timer-critical-banner"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <AlertTriangle className="w-6 h-6 animate-pulse" />
+            <div>
+              <div className="font-bold text-lg">⚠️ ATTENTION : Le chat ferme dans moins d'une minute !</div>
+              <div className="text-sm opacity-90">Temps restant : {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}</div>
+            </div>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-destructive-foreground hover:bg-destructive-foreground/20"
+            onClick={() => setDismissed(true)}
+            data-testid="button-dismiss-critical-timer"
+          >
+            <X className="w-5 h-5" />
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (dismissed) return null;
 
   return (
     <Card
@@ -51,7 +82,7 @@ export default function TimerDisplay({ timerEndTime }: TimerDisplayProps) {
             {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
           </div>
           <div className="mt-2 text-xs text-muted-foreground">
-            Les utilisateurs ne peuvent plus envoyer de messages pendant le compte à rebours.
+            Le chat se fermera automatiquement
           </div>
         </div>
         <Button

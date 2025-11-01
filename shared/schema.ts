@@ -30,6 +30,7 @@ export interface ChatConfig {
   cooldown: number;
   timerEndTime?: number;
   simulationMode: boolean;
+  directChatEnabled: boolean;
 }
 
 export interface MutedUser {
@@ -82,4 +83,5 @@ export const chatConfigSchema = z.object({
   enabled: z.boolean().optional(),
   cooldown: z.number().min(0).optional(),
   timerMinutes: z.number().min(0).optional(),
+  directChatEnabled: z.boolean().optional(),
 });

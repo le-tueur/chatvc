@@ -1,0 +1,116 @@
+{
+  "description": "Documentation des modifications apportées au système de chat pour implémenter les nouvelles fonctionnalités",
+  "date": "2025-11-01",
+  "fonctionnalités_ajoutées": [
+    {
+      "nom": "Mode Chat Direct",
+      "description": "Permet aux utilisateurs d'envoyer des messages sans validation admin quand le mode est activé",
+      "fichiers_modifiés": [
+        "shared/schema.ts",
+        "server/github-storage.ts",
+        "server/routes.ts",
+        "client/src/hooks/useWebSocket.ts",
+        "client/src/components/AdminControls.tsx"
+      ]
+    },
+    {
+      "nom": "Suppression de messages par l'admin depuis le chat",
+      "description": "Bouton de suppression visible uniquement pour pronBOT sur chaque message au survol",
+      "fichiers_modifiés": [
+        "client/src/hooks/useWebSocket.ts",
+        "client/src/components/MessageList.tsx",
+        "client/src/pages/Chat.tsx"
+      ]
+    },
+    {
+      "nom": "Alerte timer à 1 minute",
+      "description": "Bannière rouge pleine largeur en haut de l'écran quand il reste moins d'une minute",
+      "fichiers_modifiés": [
+        "client/src/components/TimerDisplay.tsx"
+      ]
+    },
+    {
+      "nom": "Export TXT amélioré",
+      "description": "Format d'export détaillé avec header, métadonnées, rôles, types de messages et footer",
+      "fichiers_modifiés": [
+        "server/routes.ts"
+      ]
+    }
+  ],
+  "fichiers_modifiés": {
+    "shared/schema.ts": {
+      "modifications": [
+        "Ajout du champ 'directChatEnabled: boolean' dans l'interface ChatConfig",
+        "Ajout de 'directChatEnabled: z.boolean().optional()' dans chatConfigSchema"
+      ],
+      "raison": "Support du mode chat direct sans validation admin"
+    },
+    "server/github-storage.ts": {
+      "modifications": [
+        "Ajout de 'directChatEnabled: false' dans le constructeur de GitHubStorage",
+        "Ajout de 'directChatEnabled: false' dans la fusion du config lors du chargement depuis GitHub"
+      ],
+      "raison": "Initialisation par défaut du mode chat direct"
+    },
+    "server/routes.ts": {
+      "modifications": [
+        "Dans handleSendMessage: Ajout de la logique d'auto-approbation si config.directChatEnabled est true",
+        "Dans handleUpdateConfig: Ajout de la gestion du champ directChatEnabled",
+        "Dans handleExportHistory: Amélioration complète du format TXT avec header détaillé, rôles, types et footer"
+      ],
+      "raison": "Implémentation de la logique serveur pour le chat direct et amélioration de l'export"
+    },
+    "client/src/hooks/useWebSocket.ts": {
+      "modifications": [
+        "Ajout de 'directChatEnabled: false' dans l'état initial du chatState",
+        "Ajout du case 'message_deleted' pour gérer la suppression de messages",
+        "Ajout de la fonction deleteMessage qui envoie l'événement 'delete_message' au serveur",
+        "Export de la fonction deleteMessage"
+      ],
+      "raison": "Support frontend pour le mode chat direct et suppression de messages"
+    },
+    "client/src/components/AdminControls.tsx": {
+      "modifications": [
+        "Ajout d'un nouveau Switch pour le mode 'Chat direct' avec description et data-testid"
+      ],
+      "raison": "Interface admin pour activer/désactiver le mode chat direct"
+    },
+    "client/src/components/MessageList.tsx": {
+      "modifications": [
+        "Ajout de l'import Button et Trash2",
+        "Ajout du prop optionnel 'onDeleteMessage' dans MessageListProps",
+        "Ajout de la classe 'group' sur le conteneur de message",
+        "Ajout d'un bouton de suppression visible au survol (opacity-0 group-hover:opacity-100) uniquement pour pronBOT"
+      ],
+      "raison": "Interface pour permettre à l'admin de supprimer des messages depuis le chat"
+    },
+    "client/src/pages/Chat.tsx": {
+      "modifications": [
+        "Récupération de deleteMessage depuis useWebSocket",
+        "Passage de onDeleteMessage={deleteMessage} aux deux instances de MessageList"
+      ],
+      "raison": "Connexion de la fonction de suppression au composant MessageList"
+    },
+    "client/src/components/TimerDisplay.tsx": {
+      "modifications": [
+        "Ajout de l'import AlertTriangle",
+        "Ajout de la constante 'isCritical' qui est true quand il reste moins d'1 minute",
+        "Ajout d'un rendu conditionnel pour afficher une bannière rouge pleine largeur avec alerte quand isCritical est true",
+        "La bannière critique a la classe 'w-full bg-destructive' et affiche '⚠️ ATTENTION : Le chat ferme dans moins d'une minute !'"
+      ],
+      "raison": "Alerte visuelle forte pour avertir les utilisateurs 1 minute avant la fermeture du chat"
+    }
+  },
+  "fichiers_ajoutés": [],
+  "résumé": {
+    "total_fichiers_modifiés": 8,
+    "total_fichiers_ajoutés": 0,
+    "total_fonctionnalités": 4
+  },
+  "notes_techniques": [
+    "Le mode chat direct fonctionne en auto-approuvant les messages côté serveur quand config.directChatEnabled est true",
+    "La suppression de messages utilise le système WebSocket existant avec l'événement 'delete_message'",
+    "L'alerte timer critique utilise un rendu conditionnel pour basculer entre la bannière rouge et le timer normal",
+    "Le format d'export TXT inclut maintenant la date, l'heure, le rôle, le type de message et des labels pour une meilleure traçabilité"
+  ]
+}

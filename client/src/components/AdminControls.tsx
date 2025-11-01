@@ -173,6 +173,19 @@ export default function AdminControls({
               />
             </div>
 
+            <div className="flex items-center justify-between">
+              <div>
+                <Label htmlFor="direct-chat" className="font-medium">Chat direct</Label>
+                <p className="text-xs text-muted-foreground">Messages envoyés sans validation admin</p>
+              </div>
+              <Switch
+                id="direct-chat"
+                checked={config.directChatEnabled}
+                onCheckedChange={(checked) => onUpdateConfig({ directChatEnabled: checked })}
+                data-testid="switch-direct-chat"
+              />
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="cooldown">Délai entre messages (secondes)</Label>
               <div className="flex gap-2">

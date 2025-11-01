@@ -49,6 +49,7 @@ export class GitHubStorage implements IStorage {
       enabled: true,
       cooldown: 0,
       simulationMode: false,
+      directChatEnabled: false,
     };
     this.mutedUsers = new Map();
     this.blockedWords = new Map();
@@ -99,11 +100,14 @@ export class GitHubStorage implements IStorage {
       // Load messages
       this.messages = storageData.messages || [];
 
-      // Load config
-      this.config = storageData.config || {
-        enabled: true,
-        cooldown: 0,
-        simulationMode: false,
+      // Load config with defaults for new fields
+      const loadedConfig = storageData.config || {};
+      this.config = {
+        enabled: loadedConfig.enabled ?? true,
+        cooldown: loadedConfig.cooldown ?? 0,
+        simulationMode: loadedConfig.simulationMode ?? false,
+        directChatEnabled: loadedConfig.directChatEnabled ?? false,
+        timerEndTime: loadedConfig.timerEndTime,
       };
 
       // Load muted users

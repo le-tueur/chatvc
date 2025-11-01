@@ -2,15 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import type { Message } from "@shared/schema";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Clock, AlertCircle, Megaphone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Clock, AlertCircle, Megaphone, Trash2 } from "lucide-react";
 
 interface MessageListProps {
   messages: Message[];
   currentUsername: string;
   currentRole: string;
+  onDeleteMessage?: (messageId: string) => void;
 }
 
-export default function MessageList({ messages, currentUsername, currentRole }: MessageListProps) {
+export default function MessageList({ messages, currentUsername, currentRole, onDeleteMessage }: MessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(true);
@@ -110,7 +112,7 @@ export default function MessageList({ messages, currentUsername, currentRole }: 
           return (
             <div
               key={message.id}
-              className={`flex gap-3 animate-slide-up ${isPending ? "opacity-60" : ""}`}
+              className={`flex gap-3 animate-slide-up ${isPending ? "opacity-60" : ""} group`}
               style={{ animationDelay: `${index * 50}ms` }}
               data-testid={`message-${message.id}`}
             >
@@ -146,6 +148,17 @@ export default function MessageList({ messages, currentUsername, currentRole }: 
                     <Badge variant="outline" className="text-xs">
                       Publication forcée
                     </Badge>
+                  )}
+                  {currentRole === "pronBOT" && onDeleteMessage && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 px-2 ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => onDeleteMessage(message.id)}
+                      data-testid={`button-delete-${message.id}`}
+                    >
+                      <Trash2 className="w-3 h-3 text-destructive" />
+                    </Button>
                   )}
                 </div>
                 <p className="mt-1 text-base leading-relaxed break-words text-foreground">
