@@ -10,6 +10,16 @@
       "timestamp": 1762033470146,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "bdc8e691-e0c7-43c9-b0e4-314c92fa2cc2",
+      "userId": "c327e1b1-47e2-492d-b27b-da1833b2dff5",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "sa marche?",
+      "timestamp": 1762034353331,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
