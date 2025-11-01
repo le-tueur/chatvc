@@ -37,6 +37,7 @@
   "config": {
     "enabled": true,
     "cooldown": 0,
-    "simulationMode": false
+    "simulationMode": false,
+    "directChatEnabled": true
   }
 }
