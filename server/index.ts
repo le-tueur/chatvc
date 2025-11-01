@@ -58,7 +58,6 @@ app.use((req, res, next) => {
 // ---------------------------
 (async () => {
   // ⚡ Charger les données depuis GitHub avant tout
-  await storage.loadFromGitHub();
 
   const server = http.createServer(app);
   const io = new SocketServer(server, {
