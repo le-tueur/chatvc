@@ -1,0 +1,22 @@
+{
+  "users": [],
+  "messages": [
+    {
+      "id": "925ceecc-f3bd-4f6e-8a0c-86de5da294f9",
+      "userId": "11bedc53-1515-4060-ae2f-939cc54e8c35",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "bruh",
+      "timestamp": 1762033470146,
+      "status": "approved",
+      "type": "normal"
+    }
+  ],
+  "mutedUsers": [],
+  "blockedWords": [],
+  "config": {
+    "enabled": true,
+    "cooldown": 0,
+    "simulationMode": false
+  }
+}
