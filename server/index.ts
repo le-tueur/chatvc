@@ -57,11 +57,12 @@ app.use((req, res, next) => {
 // Async Server Setup
 // ---------------------------
 (async () => {
+  // ⚡ Charger les données depuis GitHub avant tout
+  await storage.loadFromGitHub();
+
   const server = http.createServer(app);
   const io = new SocketServer(server, {
-    cors: {
-      origin: "*",
-    },
+    cors: { origin: "*" },
   });
 
   await registerRoutes(app);
@@ -79,7 +80,7 @@ app.use((req, res, next) => {
     });
 
     // → Nouveau message
-    socket.on("chat:message", (msg) => {
+    socket.on("chat:message", async (msg) => {
       const containsBadWord = storage.containsBlockedWord(msg.content);
       const isMuted = storage.isUserMuted(msg.username);
 
@@ -95,7 +96,7 @@ app.use((req, res, next) => {
         status: containsBadWord ? "pending" : "approved",
       };
 
-      storage.addMessage(message);
+      await storage.addMessage(message);
 
       if (message.status === "approved") {
         io.emit("chat:newMessage", message);
@@ -104,19 +105,19 @@ app.use((req, res, next) => {
       }
     });
 
-    // → Message approuvé ou rejeté par admin Gnoir
-    socket.on("chat:moderate", ({ id, action }) => {
+    // → Message approuvé ou rejeté par admin
+    socket.on("chat:moderate", async ({ id, action }) => {
       if (action === "approve") {
-        storage.updateMessage(id, { status: "approved" });
+        await storage.updateMessage(id, { status: "approved" });
         const msg = storage.getMessages().find((m) => m.id === id);
         if (msg) io.emit("chat:newMessage", msg);
       } else if (action === "reject") {
-        storage.updateMessage(id, { status: "rejected" });
+        await storage.updateMessage(id, { status: "rejected" });
         io.emit("chat:remove", id);
       }
     });
 
-    // → Gestion typing (en train d’écrire)
+    // → Gestion typing
     socket.on("chat:typing", (username) => {
       storage.setUserTyping(username);
       io.emit("chat:typingUsers", storage.getTypingUsers());
@@ -154,3 +155,4 @@ app.use((req, res, next) => {
     console.log(`🚀 Serveur + Socket.io en écoute sur le port ${PORT}`);
   });
 })();
+
