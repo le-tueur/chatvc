@@ -248,7 +248,45 @@ TypingUser { username, timestamp }
 
 ## Recent Changes
 
-**2024-11-01:** MVP COMPLETE ✅
+**2024-11-01:** MVP COMPLETE + GitHub Persistence ✅
+- **GitHub Persistence Implemented:**
+  - Created GitHubStorage class with full GitHub API integration
+  - Automatic save with 2-second debounce to minimize API calls
+  - Graceful fallback when GitHub is unavailable (logs warning, continues with in-memory)
+  - Persists: messages, mutedUsers, blockedWords, config
+  - Users remain session-based (not persisted)
+  
+- **New Admin Features:**
+  - **Delete Message:** Admins can now delete any message (delete_message event)
+  - **Send Warning:** New send_warning event for yellow warning messages
+  - **Improved Exports:**
+    - TXT format: `[HH:MM] username: message` (only approved messages)
+    - JSON format: Full chat-storage.json with all data
+  
+- **Timer Auto-Disable:**
+  - Timer now automatically disables chat when time expires
+  - Sends system message: "⏰ Le chat est fermé, fin du timer."
+  - Broadcasts config update to all clients
+  - Persists new state to GitHub
+  
+- **Session Persistence:**
+  - Login state saved to localStorage
+  - Auto-restore on page reload
+  - No more disconnection on refresh
+  - Cleared on manual logout
+  
+- **Configuration Improvements:**
+  - handleUpdateConfig now preserves all config fields
+  - No more accidental overwriting of concurrent updates
+  
+**Setup Required:**
+- GitHub Token needs repo write permissions for persistence
+- Current token returns 401 - needs to be updated in Secrets
+- Repo: le-tueur/chatvc
+- File: chat-storage.json
+- Branch: main
+
+**Previous (2024-11-01):** MVP COMPLETE ✅
 - Implemented complete data schema with all interfaces
 - Added custom animations to Tailwind config
 - Created beautiful login page with role selection
