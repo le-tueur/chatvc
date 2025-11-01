@@ -148,6 +148,6 @@
     "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
-    "directChatEnabled": true
+    "directChatEnabled": false
   }
 }
