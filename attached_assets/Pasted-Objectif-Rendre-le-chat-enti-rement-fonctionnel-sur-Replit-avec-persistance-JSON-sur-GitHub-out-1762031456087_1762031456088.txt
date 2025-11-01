@@ -1,0 +1,74 @@
+Objectif :
+Rendre le chat entièrement fonctionnel sur Replit, avec persistance JSON sur GitHub, outils d’administration, correction des exports, et désactivation automatique à la fin du timer.
+
+1. 🔒 Persistance GitHub
+
+Mettre en place un système de sauvegarde des données dans un fichier JSON GitHub :
+
+Structure du fichier :
+
+{
+  "users": [],
+  "messages": [],
+  "mutedUsers": [],
+  "blockedWords": [],
+  "config": {
+    "enabled": true,
+    "cooldown": 0,
+    "simulationMode": false,
+    "timer": 0
+  }
+}
+
+
+Paramètres GitHub :
+
+Repo : le-tueur/chatvc
+
+Branche : main
+ 
+// config.ts (à garder hors Git !)
+export const GITHUB_TOKEN = "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"; // Remplace par ton vrai token
+export const GITHUB_REPO = "le-tueur/chatvc"; // Exemple : "le-tueur/chatvc"
+export const GITHUB_BRANCH = "main"; // Branche sur laquelle tu veux lire/écrire le JSON
+
+// Optionnel : nom du fichier JSON dans le repo
+export const GITHUB_STORAGE_FILE = "chat-storage.json"; // Exemple : "chat-storage.json"
+Fichier : chat-storage.json
+
+Token GitHub à utiliser via une variable d’environnement :
+
+2. ⚙️ Administration
+ajoute c'est pouvoir 
+
+Supprimer n’importe quel message
+
+
+3. 🧭 Comportement du timer
+
+Lorsqu’un admin lance un timer (startTimer(seconds)), le serveur :
+
+Démarre un compte à rebours en arrière-plan.
+
+Quand le temps est écoulé :
+
+Met config.enabled = false.
+
+Sauvegarde l’état dans le JSON GitHub.
+
+Envoie un message système (par exemple : “⏰ Le chat est fermé, fin du timer.”)
+
+Bloque la fonction d’envoi de message côté client (bouton “Envoyer” désactivé).
+
+4. 🧰 Correction des fonctions existantes
+
+Réparer et finaliser ces fonctionnalités :
+
+Exporter TXT : génère un fichier chat.txt avec les messages (format “[heure] pseudo: message”)
+
+Exporter JSON : télécharge le fichier chat-storage.json
+
+Flash général
+
+Avertissement
+→ Toutes ces fonctions doivent fonctionner sans plantage du serveur. et aussi si on reinistialise la page on doit pas etre decoonnecter
