@@ -1,9 +1,16 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
-import { storage } from "./storage";
-import type { User, Message, UserRole } from "@shared/schema";
+import { GitHubStorage } from "./github-storage";
+import type { User, Message, UserRole, ChatConfig } from "@shared/schema";
 import { randomUUID } from "crypto";
+
+const githubToken = process.env.GITHUB_TOKEN;
+if (!githubToken) {
+  throw new Error("GITHUB_TOKEN environment variable is required");
+}
+
+export const storage = new GitHubStorage(githubToken);
 
 interface WebSocketClient extends WebSocket {
   userId?: string;
@@ -19,9 +26,33 @@ const CREDENTIALS: Record<string, string> = {
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Initialize GitHub storage
+  await storage.initialize();
+  
   const httpServer = createServer(app);
   
   const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
+  
+  // Timer check interval
+  setInterval(() => {
+    const config = storage.getConfig();
+    if (config.timerEndTime && Date.now() >= config.timerEndTime) {
+      storage.updateConfig({ enabled: false, timerEndTime: undefined });
+      const systemMessage: Message = {
+        id: randomUUID(),
+        userId: "system",
+        username: "Système",
+        role: "pronBOT",
+        content: "⏰ Le chat est fermé, fin du timer.",
+        timestamp: Date.now(),
+        status: "approved",
+        type: "event",
+      };
+      storage.addMessage(systemMessage);
+      broadcast(wss, { type: "message", message: systemMessage });
+      broadcast(wss, { type: "config_update", config: storage.getConfig() });
+    }
+  }, 1000); // Check every second
 
   wss.on("connection", (ws: WebSocketClient) => {
     ws.isAlive = true;
@@ -131,6 +162,12 @@ function handleWebSocketMessage(
       break;
     case "export_history":
       handleExportHistory(ws, message);
+      break;
+    case "delete_message":
+      handleDeleteMessage(ws, message, wss);
+      break;
+    case "send_warning":
+      handleSendWarning(ws, message, wss);
       break;
   }
 }
@@ -361,15 +398,27 @@ function handleUpdateConfig(
 
   const { config } = message;
   
+  const updates: Partial<ChatConfig> = {};
+  
   if (config.timerMinutes !== undefined) {
-    const timerEndTime = config.timerMinutes > 0
+    updates.timerEndTime = config.timerMinutes > 0
       ? Date.now() + config.timerMinutes * 60000
       : undefined;
-    storage.updateConfig({ timerEndTime });
-  } else {
-    storage.updateConfig(config);
+  }
+  
+  if (config.enabled !== undefined) {
+    updates.enabled = config.enabled;
+  }
+  
+  if (config.cooldown !== undefined) {
+    updates.cooldown = config.cooldown;
+  }
+  
+  if (config.simulationMode !== undefined) {
+    updates.simulationMode = config.simulationMode;
   }
 
+  storage.updateConfig(updates);
   broadcast(wss, { type: "config_update", config: storage.getConfig() });
 }
 
@@ -500,38 +549,81 @@ function handleTriggerAnimation(
   broadcast(wss, { type: "animation_trigger", animationType });
 }
 
-function handleExportHistory(ws: WebSocketClient, message: any) {
+async function handleExportHistory(ws: WebSocketClient, message: any) {
   if (ws.role !== "pronBOT") return;
 
   const { format } = message;
-  const messages = storage.getMessages();
 
   if (format === "json") {
-    const jsonData = JSON.stringify(messages, null, 2);
+    // Export the full GitHub storage data
+    const storageData = await storage.getStorageDataForExport();
+    const jsonData = JSON.stringify(storageData, null, 2);
     ws.send(
       JSON.stringify({
         type: "export_data",
         format: "json",
         data: jsonData,
-        filename: `chat-history-${Date.now()}.json`,
+        filename: `chat-storage.json`,
       })
     );
   } else if (format === "text") {
+    // Export as formatted text
+    const messages = storage.getMessages();
     const textData = messages
-      .map(
-        (m) =>
-          `[${new Date(m.timestamp).toLocaleString()}] ${m.username}: ${m.content}`
-      )
+      .filter(m => m.status === "approved" || m.type === "event" || m.type === "flash")
+      .map((m) => {
+        const date = new Date(m.timestamp);
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `[${hours}:${minutes}] ${m.username}: ${m.content}`;
+      })
       .join("\n");
     ws.send(
       JSON.stringify({
         type: "export_data",
         format: "text",
         data: textData,
-        filename: `chat-history-${Date.now()}.txt`,
+        filename: `chat.txt`,
       })
     );
   }
+}
+
+function handleDeleteMessage(
+  ws: WebSocketClient,
+  message: any,
+  wss: WebSocketServer
+) {
+  if (ws.role !== "pronBOT") return;
+
+  const { messageId } = message;
+  storage.deleteMessage(messageId);
+  broadcast(wss, { type: "message_deleted", messageId });
+}
+
+function handleSendWarning(
+  ws: WebSocketClient,
+  message: any,
+  wss: WebSocketServer
+) {
+  if (ws.role !== "pronBOT") return;
+
+  const { content } = message;
+  if (!content) return;
+
+  const warningMessage: Message = {
+    id: randomUUID(),
+    userId: ws.userId!,
+    username: "⚠️ Avertissement",
+    role: "pronBOT",
+    content,
+    timestamp: Date.now(),
+    status: "approved",
+    type: "event",
+  };
+
+  storage.addMessage(warningMessage);
+  broadcast(wss, { type: "message", message: warningMessage });
 }
 
 function broadcast(wss: WebSocketServer, data: any) {
