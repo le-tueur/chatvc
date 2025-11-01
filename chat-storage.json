@@ -1,37 +1,6 @@
 {
   "users": [],
-  "messages": [
-    {
-      "id": "925ceecc-f3bd-4f6e-8a0c-86de5da294f9",
-      "userId": "11bedc53-1515-4060-ae2f-939cc54e8c35",
-      "username": "pronBOT",
-      "role": "pronBOT",
-      "content": "bruh",
-      "timestamp": 1762033470146,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "bdc8e691-e0c7-43c9-b0e4-314c92fa2cc2",
-      "userId": "c327e1b1-47e2-492d-b27b-da1833b2dff5",
-      "username": "pronBOT",
-      "role": "pronBOT",
-      "content": "sa marche?",
-      "timestamp": 1762034353331,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "72c77805-8751-4560-b133-68faea177800",
-      "userId": "420ac2b4-2616-4a16-9f16-9cb8ee1608cd",
-      "username": "ad",
-      "role": "ad",
-      "content": "bonjour",
-      "timestamp": 1762034514426,
-      "status": "approved",
-      "type": "normal"
-    }
-  ],
+  "messages": [],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
