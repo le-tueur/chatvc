@@ -27,10 +27,10 @@ export default function TypingIndicator({ typingUsers, currentUsername }: Typing
         </div>
         <span>
           {otherTypingUsers.length === 1
-            ? `${otherTypingUsers[0]} is typing...`
+            ? `${otherTypingUsers[0]} est en train d'écrire...`
             : otherTypingUsers.length === 2
-            ? `${otherTypingUsers[0]} and ${otherTypingUsers[1]} are typing...`
-            : `${otherTypingUsers.length} people are typing...`}
+            ? `${otherTypingUsers[0]} et ${otherTypingUsers[1]} écrivent...`
+            : `${otherTypingUsers.length} personnes écrivent...`}
         </span>
       </div>
     </div>

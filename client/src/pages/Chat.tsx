@@ -21,7 +21,7 @@ interface ChatProps {
 
 export default function Chat({ username, role, onLogout }: ChatProps) {
   const [adminView, setAdminView] = useState<"panel" | "chat">("chat");
-  const isAdmin = role === "gnoir";
+  const isAdmin = role === "pronBOT";
 
   const {
     isConnected,
@@ -60,15 +60,15 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
             )}
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-foreground">Chat Moderation System</h1>
+            <h1 className="text-xl font-semibold text-foreground">Système de modération du chat</h1>
             <div className="flex items-center gap-2">
               <Badge variant={isConnected ? "default" : "destructive"} className="text-xs">
-                {isConnected ? "Connected" : "Disconnected"}
+                {isConnected ? "Connecté" : "Déconnecté"}
               </Badge>
-              <span className="text-xs text-muted-foreground">Logged in as <strong>{username}</strong></span>
+              <span className="text-xs text-muted-foreground">Connecté en tant que <strong>{username}</strong></span>
               {isAdmin && <Badge variant="destructive" className="text-xs">Admin</Badge>}
               {chatState.config.simulationMode && (
-                <Badge variant="secondary" className="text-xs">Simulation Mode</Badge>
+                <Badge variant="secondary" className="text-xs">Mode simulation</Badge>
               )}
             </div>
           </div>
@@ -93,13 +93,13 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
                 data-testid="button-view-panel"
               >
                 <Settings className="w-4 h-4 mr-2" />
-                Admin Panel
+                Panneau Admin
               </Button>
             </div>
           )}
           <Button variant="outline" onClick={onLogout} data-testid="button-logout">
             <LogOut className="w-4 h-4 mr-2" />
-            Logout
+            Déconnexion
           </Button>
         </div>
       </header>
@@ -117,9 +117,9 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
           <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
             <div className="flex-1 flex flex-col overflow-hidden">
               <div className="p-6 border-b border-border">
-                <h2 className="text-2xl font-bold text-foreground">Admin Dashboard</h2>
+                <h2 className="text-2xl font-bold text-foreground">Tableau de bord administrateur</h2>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Comprehensive moderation controls for the chat system
+                  Contrôles complets de modération pour le système de chat
                 </p>
               </div>
 
@@ -160,7 +160,7 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
 
             <Card className="hidden lg:flex w-80 flex-col border-l border-border rounded-none">
               <div className="p-4 border-b border-border">
-                <h3 className="font-semibold text-sm">Live Chat Preview</h3>
+                <h3 className="font-semibold text-sm">Aperçu du chat en direct</h3>
               </div>
               <MessageList
                 messages={chatState.messages}
@@ -196,7 +196,7 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
         {isAdmin && adminView === "chat" && (
           <Card className="hidden xl:flex w-96 flex-col border-l border-border rounded-none">
             <div className="p-4 border-b border-border">
-              <h3 className="font-semibold">Quick Admin Controls</h3>
+              <h3 className="font-semibold">Contrôles rapides d'administration</h3>
             </div>
             <div className="flex-1 overflow-hidden">
               <PendingMessages

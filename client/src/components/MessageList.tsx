@@ -35,7 +35,7 @@ export default function MessageList({ messages, currentUsername, currentRole }: 
         return "bg-blue-500";
       case "shainez":
         return "bg-purple-500";
-      case "gnoir":
+  case "pronBOT":
         return "bg-destructive";
       default:
         return "bg-muted";
@@ -45,7 +45,7 @@ export default function MessageList({ messages, currentUsername, currentRole }: 
   const visibleMessages = messages.filter(msg => {
     if (msg.type === "event" || msg.type === "flash") return true;
     if (msg.status === "approved" || msg.forcePublished) return true;
-    if (currentRole === "gnoir") return true;
+  if (currentRole === "pronBOT") return true;
     if (msg.username === currentUsername) return true;
     return false;
   });
@@ -62,9 +62,9 @@ export default function MessageList({ messages, currentUsername, currentRole }: 
           <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
             <Megaphone className="w-8 h-8 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">No messages yet</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-2">Aucun message pour l'instant</h3>
           <p className="text-sm text-muted-foreground max-w-sm">
-            Be the first to start the conversation! Send a message below.
+            Soyez le premier à démarrer la conversation ! Envoyez un message ci-dessous.
           </p>
         </div>
       ) : (
@@ -124,9 +124,9 @@ export default function MessageList({ messages, currentUsername, currentRole }: 
                   <span className="font-semibold text-sm text-foreground">
                     {message.username}
                   </span>
-                  {message.role === "gnoir" && (
+                  {message.role === "pronBOT" && (
                     <Badge variant="destructive" className="text-xs">
-                      Admin
+                      Administrateur
                     </Badge>
                   )}
                   <span className="text-xs text-muted-foreground opacity-70 font-mono">
@@ -139,12 +139,12 @@ export default function MessageList({ messages, currentUsername, currentRole }: 
                       data-testid={`badge-pending-${message.id}`}
                     >
                       <Clock className="w-3 h-3 mr-1" />
-                      Pending approval
+                      En attente de validation
                     </Badge>
                   )}
                   {message.forcePublished && (
                     <Badge variant="outline" className="text-xs">
-                      Force Published
+                      Publication forcée
                     </Badge>
                   )}
                 </div>

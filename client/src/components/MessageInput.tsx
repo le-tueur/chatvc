@@ -59,8 +59,8 @@ export default function MessageInput({
     if (disabled) {
       toast({
         variant: "destructive",
-        title: "Chat Disabled",
-        description: "The chat has been temporarily disabled by the administrator.",
+        title: "Chat désactivé",
+        description: "Le chat a été temporairement désactivé par l'administrateur ou le compte à rebours est actif.",
       });
       return;
     }
@@ -68,8 +68,8 @@ export default function MessageInput({
     if (!canSend) {
       toast({
         variant: "destructive",
-        title: "Please wait",
-        description: `You can send another message in ${timeRemaining} seconds.`,
+        title: "Veuillez patienter",
+        description: `Vous pourrez envoyer un autre message dans ${timeRemaining} secondes.`,
       });
       return;
     }
@@ -102,7 +102,7 @@ export default function MessageInput({
           value={message}
           onChange={(e) => handleTyping(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={disabled ? "Chat is disabled..." : "Type your message..."}
+          placeholder={disabled ? "Le chat est désactivé..." : "Écrivez votre message..."}
           className="flex-1 resize-none rounded-lg px-4 py-3 min-h-[60px] max-h-24"
           disabled={disabled}
           data-testid="input-message"
@@ -119,12 +119,12 @@ export default function MessageInput({
       </div>
       {timeRemaining > 0 && (
         <p className="text-xs text-muted-foreground mt-2" data-testid="text-cooldown">
-          Wait {timeRemaining}s before sending another message
+          Attendez {timeRemaining}s avant d'envoyer un autre message
         </p>
       )}
       {message.length > 0 && (
         <p className="text-xs text-muted-foreground mt-2">
-          {message.length} / 1000 characters
+          {message.length} / 1000 caractères
         </p>
       )}
     </form>

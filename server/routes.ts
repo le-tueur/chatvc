@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
 import { storage } from "./storage";
-import type { User, Message } from "@shared/schema";
+import type { User, Message, UserRole } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 interface WebSocketClient extends WebSocket {
@@ -14,8 +14,8 @@ interface WebSocketClient extends WebSocket {
 
 const CREDENTIALS: Record<string, string> = {
   ad: "adbk",
-  shainez: "moije123456",
-  gnoir: "Ballon:)2008",
+  shainez: "WVFw*{~a<;A*}3>&4yR~caoa#hrbr|z=E?M4`z$7,bZC2r+r>dAt-GU]C_o3)kXQSEE`9>o|e[D8qgxPy^C~QW-vQSt#PT$%[=}O8N(EzuI5E(V%>OwT}.LLmV}mu^+&@SXz<|P?A2([1m{u`982^qSLtf!Q]}`8ev;VM^D/lYOHm/%/6=JXY0Z,kU<md&^JQ~!@Rt`CHxyU?(,43KaJ7G#w4wI?Uociv>Dy@<z]%y@]up.G_{~|VZoZurAj0eUS",
+  pronBOT: "Ballon:)2008",
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -139,7 +139,7 @@ function handleAuth(ws: WebSocketClient, message: any, wss: WebSocketServer) {
   const { username, role } = message;
   
   if (!CREDENTIALS[username]) {
-    ws.send(JSON.stringify({ type: "error", message: "Invalid username" }));
+    ws.send(JSON.stringify({ type: "error", message: "Nom d'utilisateur invalide" }));
     return;
   }
 
@@ -168,7 +168,7 @@ function handleAuth(ws: WebSocketClient, message: any, wss: WebSocketServer) {
       config: storage.getConfig(),
       mutedUsers: storage.getMutedUsers(),
       blockedWords: storage.getBlockedWords(),
-      pendingMessages: role === "gnoir" ? storage.getPendingMessages() : [],
+  pendingMessages: role === "pronBOT" ? storage.getPendingMessages() : [],
     })
   );
 
@@ -187,13 +187,13 @@ function handleSendMessage(
   if (!content || content.trim().length === 0) return;
   if (content.length > 1000) return;
 
-  if (!storage.getConfig().enabled && ws.role !== "gnoir") {
-    ws.send(JSON.stringify({ type: "error", message: "Chat is disabled" }));
+  if (!storage.getConfig().enabled && ws.role !== "pronBOT") {
+    ws.send(JSON.stringify({ type: "error", message: "Le chat est désactivé" }));
     return;
   }
 
   if (storage.isUserMuted(ws.username)) {
-    ws.send(JSON.stringify({ type: "error", message: "You are muted" }));
+    ws.send(JSON.stringify({ type: "error", message: "Vous êtes en sourdine" }));
     return;
   }
 
@@ -201,33 +201,33 @@ function handleSendMessage(
     ws.send(
       JSON.stringify({
         type: "error",
-        message: "Message contains blocked words",
+        message: "Le message contient des mots bloqués",
       })
     );
     return;
   }
 
-  const newMessage: Message = {
-    id: randomUUID(),
-    userId: ws.userId,
-    username: ws.username,
-    role: ws.role!,
-    content: content.trim(),
-    timestamp: Date.now(),
-    status: ws.role === "gnoir" ? "approved" : "pending",
-    type: "normal",
+const newMessage: Message = {
+  id: randomUUID(),
+  userId: ws.userId,
+  username: ws.username,
+  role: ws.role! as UserRole,  // ✅ Cast explicite
+  content: content.trim(),
+  timestamp: Date.now(),
+  status: ws.role === "pronBOT" ? "approved" : "pending",
+  type: "normal",
   };
 
   storage.addMessage(newMessage);
 
-  if (ws.role === "gnoir") {
+  if (ws.role === "pronBOT") {
     broadcast(wss, { type: "message", message: newMessage });
   } else {
     ws.send(JSON.stringify({ type: "pending_message", message: newMessage }));
     
     wss.clients.forEach((client) => {
       const c = client as WebSocketClient;
-      if (c.readyState === WebSocket.OPEN && c.role === "gnoir") {
+  if (c.readyState === WebSocket.OPEN && c.role === "pronBOT") {
         c.send(JSON.stringify({ type: "pending_message", message: newMessage }));
       }
     });
@@ -256,7 +256,7 @@ function handleApproveMessage(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { messageId } = message;
   storage.updateMessage(messageId, { status: "approved" });
@@ -273,7 +273,7 @@ function handleRejectMessage(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { messageId } = message;
   storage.deleteMessage(messageId);
@@ -285,7 +285,7 @@ function handleForcePublish(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { messageId } = message;
   storage.updateMessage(messageId, { forcePublished: true, status: "approved" });
@@ -302,7 +302,7 @@ function handleSendEvent(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { content } = message;
   if (!content) return;
@@ -311,7 +311,7 @@ function handleSendEvent(
     id: randomUUID(),
     userId: ws.userId!,
     username: ws.username!,
-    role: ws.role,
+    role: "pronBOT",
     content,
     timestamp: Date.now(),
     status: "approved",
@@ -327,7 +327,7 @@ function handleSendFlash(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { content, duration } = message;
   if (!content || !duration) return;
@@ -336,7 +336,7 @@ function handleSendFlash(
     id: randomUUID(),
     userId: ws.userId!,
     username: ws.username!,
-    role: ws.role,
+    role: "pronBOT",
     content,
     timestamp: Date.now(),
     status: "approved",
@@ -357,7 +357,7 @@ function handleUpdateConfig(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { config } = message;
   
@@ -378,7 +378,7 @@ function handleMuteUser(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { username, duration } = message;
   const mutedUntil = Date.now() + duration * 60000;
@@ -396,7 +396,7 @@ function handleUnmuteUser(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { username } = message;
   storage.removeMutedUser(username);
@@ -412,7 +412,7 @@ function handleHideUser(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { username } = message;
   const user = storage.getUserByUsername(username);
@@ -427,7 +427,7 @@ function handleUnhideUser(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { username } = message;
   const user = storage.getUserByUsername(username);
@@ -442,7 +442,7 @@ function handleAddBlockedWord(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { word } = message;
   storage.addBlockedWord(word);
@@ -457,7 +457,7 @@ function handleRemoveBlockedWord(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { word } = message;
   storage.removeBlockedWord(word);
@@ -472,7 +472,7 @@ function handleClearHistory(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   storage.clearMessages();
   broadcast(wss, { type: "messages_cleared" });
@@ -483,7 +483,7 @@ function handleResetTimers(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   storage.updateConfig({ timerEndTime: undefined, cooldown: 0 });
   broadcast(wss, { type: "config_update", config: storage.getConfig() });
@@ -494,14 +494,14 @@ function handleTriggerAnimation(
   message: any,
   wss: WebSocketServer
 ) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { animationType } = message;
   broadcast(wss, { type: "animation_trigger", animationType });
 }
 
 function handleExportHistory(ws: WebSocketClient, message: any) {
-  if (ws.role !== "gnoir") return;
+  if (ws.role !== "pronBOT") return;
 
   const { format } = message;
   const messages = storage.getMessages();

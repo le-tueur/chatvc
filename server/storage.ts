@@ -216,13 +216,13 @@ export class MemStorage implements IStorage {
     const now = Date.now();
     const activeTyping: string[] = [];
     
-    for (const [username, timestamp] of this.typingUsers.entries()) {
+    Array.from(this.typingUsers.entries()).forEach(([username, timestamp]) => {
       if (now - timestamp < 5000) {
         activeTyping.push(username);
       } else {
         this.typingUsers.delete(username);
       }
-    }
+    });
     
     return activeTyping;
   }

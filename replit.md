@@ -12,7 +12,7 @@ A sophisticated real-time chat application with comprehensive moderation feature
 ### User Roles
 1. **ad** (password: adbk) - Regular chat user
 2. **shainez** (password: moije123456) - Regular chat user  
-3. **gnoir** (password: Ballon:)2008) - Administrator with full control panel
+3. **pronBOT** (password: Ballon:)2008) - Administrator with full control panel
 
 ### Key Features Implemented
 
@@ -32,7 +32,7 @@ A sophisticated real-time chat application with comprehensive moderation feature
 - Message cooldown enforcement
 - Character counter (0-1000 chars)
 
-#### For Admin (gnoir)
+#### For Admin (pronBOT)
 - **Dual View Modes:**
   - Chat view with quick controls sidebar
   - Full admin panel with live chat preview
@@ -229,7 +229,7 @@ TypingUser { username, timestamp }
 ## Testing Results
 
 **End-to-End Test Suite:** ✅ All 12 scenarios PASSED
-- Multi-role login (ad, shainez, gnoir)
+- Multi-role login (ad, shainez, pronBOT)
 - Message approval workflow (pending → approved/rejected)
 - Admin controls (chat enable/disable, mute, blocked words, timer, events)
 - Real-time WebSocket updates across multiple users

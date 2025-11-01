@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export type UserRole = "ad" | "shainez" | "gnoir";
+export type UserRole = "ad" | "shainez" | "pronBOT";
 
 export interface User {
   id: string;
@@ -48,7 +48,7 @@ export interface TypingUser {
 }
 
 export const loginSchema = z.object({
-  username: z.enum(["ad", "shainez", "gnoir"]),
+  username: z.enum(["ad", "shainez", "pronBOT"]),
   password: z.string().min(1, "Password is required"),
 });
 

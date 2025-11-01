@@ -91,7 +91,7 @@ export default function AdminControls({
       toast({ variant: "destructive", title: "Invalid timer value" });
       return;
     }
-    onUpdateConfig({ timerMinutes: value });
+    onUpdateConfig({ timerEndTime: Date.now() + value * 60 * 1000 });
     toast({ title: "Timer set", description: `Chat will close in ${value} minutes` });
     setTimerValue("0");
   };
@@ -143,14 +143,14 @@ export default function AdminControls({
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <Settings className="w-4 h-4 text-muted-foreground" />
-            <h3 className="text-sm font-semibold uppercase tracking-wide">Chat Controls</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wide">Contrôles du chat</h3>
           </div>
 
           <Card className="p-4 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="chat-enabled" className="font-medium">Enable Chat</Label>
-                <p className="text-xs text-muted-foreground">Allow users to send messages</p>
+                <Label htmlFor="chat-enabled" className="font-medium">Activer le chat</Label>
+                <p className="text-xs text-muted-foreground">Autoriser les utilisateurs à envoyer des messages</p>
               </div>
               <Switch
                 id="chat-enabled"
@@ -162,8 +162,8 @@ export default function AdminControls({
 
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="simulation-mode" className="font-medium">Simulation Mode</Label>
-                <p className="text-xs text-muted-foreground">Test without affecting real users</p>
+                <Label htmlFor="simulation-mode" className="font-medium">Mode simulation</Label>
+                <p className="text-xs text-muted-foreground">Tester sans impacter les vrais utilisateurs</p>
               </div>
               <Switch
                 id="simulation-mode"
@@ -174,7 +174,7 @@ export default function AdminControls({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="cooldown">Message Cooldown (seconds)</Label>
+              <Label htmlFor="cooldown">Délai entre messages (secondes)</Label>
               <div className="flex gap-2">
                 <Input
                   id="cooldown"
@@ -186,13 +186,13 @@ export default function AdminControls({
                   data-testid="input-cooldown"
                 />
                 <Button onClick={handleCooldownUpdate} className="h-10" data-testid="button-set-cooldown">
-                  Set
+                  Valider
                 </Button>
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="timer">Chat Closure Timer (minutes)</Label>
+              <Label htmlFor="timer">Minuterie de fermeture du chat (minutes)</Label>
               <div className="flex gap-2">
                 <Input
                   id="timer"
@@ -204,7 +204,7 @@ export default function AdminControls({
                   data-testid="input-timer"
                 />
                 <Button onClick={handleTimerUpdate} className="h-10" data-testid="button-set-timer">
-                  Set
+                  Valider
                 </Button>
               </div>
             </div>
@@ -214,17 +214,17 @@ export default function AdminControls({
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <Megaphone className="w-4 h-4 text-muted-foreground" />
-            <h3 className="text-sm font-semibold uppercase tracking-wide">Announcements</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wide">Annonces</h3>
           </div>
 
           <Card className="p-4 space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="event-message">Event Message (Red Banner)</Label>
+              <Label htmlFor="event-message">Message d'événement (bannière rouge)</Label>
               <Textarea
                 id="event-message"
                 value={eventMessage}
                 onChange={(e) => setEventMessage(e.target.value)}
-                placeholder="Important announcement..."
+                placeholder="Annonce importante..."
                 className="resize-none h-20"
                 maxLength={500}
                 data-testid="input-event"
@@ -235,17 +235,17 @@ export default function AdminControls({
                 disabled={!eventMessage.trim()}
                 data-testid="button-send-event"
               >
-                Send Event
+                Envoyer l'événement
               </Button>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="flash-message">Flash Message (Auto-disappear)</Label>
+              <Label htmlFor="flash-message">Message flash (disparaît automatiquement)</Label>
               <Textarea
                 id="flash-message"
                 value={flashMessage}
                 onChange={(e) => setFlashMessage(e.target.value)}
-                placeholder="Temporary message..."
+                placeholder="Message temporaire..."
                 className="resize-none h-20"
                 maxLength={500}
                 data-testid="input-flash"
@@ -267,7 +267,7 @@ export default function AdminControls({
                   disabled={!flashMessage.trim()}
                   data-testid="button-send-flash"
                 >
-                  Send Flash
+                  Envoyer le flash
                 </Button>
               </div>
             </div>
@@ -277,42 +277,42 @@ export default function AdminControls({
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <UserX className="w-4 h-4 text-muted-foreground" />
-            <h3 className="text-sm font-semibold uppercase tracking-wide">User Management</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wide">Gestion des utilisateurs</h3>
           </div>
 
           <Card className="p-4 space-y-4">
             <div className="space-y-2">
-              <Label>Mute User</Label>
+              <Label>Mettre en sourdine</Label>
               <div className="flex gap-2">
-                <Input
-                  value={muteUsername}
-                  onChange={(e) => setMuteUsername(e.target.value)}
-                  placeholder="Username"
-                  className="h-10"
-                  list="users-list"
-                  data-testid="input-mute-username"
-                />
+                  <Input
+                    value={muteUsername}
+                    onChange={(e) => setMuteUsername(e.target.value)}
+                    placeholder="Nom d'utilisateur"
+                    className="h-10"
+                    list="users-list"
+                    data-testid="input-mute-username"
+                  />
                 <datalist id="users-list">
                   {otherUsers.map(u => <option key={u.id} value={u.username} />)}
                 </datalist>
-                <Input
-                  type="number"
-                  min="1"
-                  value={muteDuration}
-                  onChange={(e) => setMuteDuration(e.target.value)}
-                  placeholder="Min"
-                  className="h-10 w-20"
-                  data-testid="input-mute-duration"
-                />
-                <Button onClick={handleMuteUser} className="h-10" data-testid="button-mute">
-                  Mute
-                </Button>
+                  <Input
+                    type="number"
+                    min="1"
+                    value={muteDuration}
+                    onChange={(e) => setMuteDuration(e.target.value)}
+                    placeholder="Min"
+                    className="h-10 w-20"
+                    data-testid="input-mute-duration"
+                  />
+                  <Button onClick={handleMuteUser} className="h-10" data-testid="button-mute">
+                    Sourdine
+                  </Button>
               </div>
             </div>
 
             {mutedUsers.length > 0 && (
               <div className="space-y-2">
-                <Label className="text-xs">Active Mutes</Label>
+                <Label className="text-xs">Sourdines actives</Label>
                 <div className="flex flex-wrap gap-2">
                   {mutedUsers.map((mu) => {
                     const timeLeft = Math.ceil((mu.mutedUntil - Date.now()) / 60000);
@@ -333,7 +333,7 @@ export default function AdminControls({
             )}
 
             <div className="space-y-2">
-              <Label className="text-xs">Hide/Unhide Users</Label>
+                <Label className="text-xs">Cacher/Afficher les utilisateurs</Label>
               <div className="flex flex-wrap gap-2">
                 {otherUsers.map((user) => (
                   <Badge
@@ -357,26 +357,26 @@ export default function AdminControls({
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <Ban className="w-4 h-4 text-muted-foreground" />
-            <h3 className="text-sm font-semibold uppercase tracking-wide">Blocked Words</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wide">Mots bloqués</h3>
           </div>
 
           <Card className="p-4 space-y-4">
             <div className="flex gap-2">
-              <Input
-                value={newBlockedWord}
-                onChange={(e) => setNewBlockedWord(e.target.value)}
-                placeholder="Word or phrase..."
-                className="h-10"
-                data-testid="input-blocked-word"
-              />
-              <Button
-                onClick={handleAddBlockedWord}
-                className="h-10"
-                disabled={!newBlockedWord.trim()}
-                data-testid="button-add-blocked"
-              >
-                Add
-              </Button>
+                <Input
+                  value={newBlockedWord}
+                  onChange={(e) => setNewBlockedWord(e.target.value)}
+                  placeholder="Mot ou phrase..."
+                  className="h-10"
+                  data-testid="input-blocked-word"
+                />
+                <Button
+                  onClick={handleAddBlockedWord}
+                  className="h-10"
+                  disabled={!newBlockedWord.trim()}
+                  data-testid="button-add-blocked"
+                >
+                  Ajouter
+                </Button>
             </div>
 
             {blockedWords.length > 0 && (
@@ -405,15 +405,15 @@ export default function AdminControls({
 
           <Card className="p-4">
             <div className="grid grid-cols-2 gap-3">
-              <Button
-                variant="destructive"
-                className="h-10"
-                onClick={onClearHistory}
-                data-testid="button-clear-history"
-              >
-                <Trash2 className="w-4 h-4 mr-2" />
-                Clear History
-              </Button>
+                <Button
+                  variant="destructive"
+                  className="h-10"
+                  onClick={onClearHistory}
+                  data-testid="button-clear-history"
+                >
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Effacer l'historique
+                </Button>
 
               <Button
                 variant="secondary"
@@ -422,7 +422,7 @@ export default function AdminControls({
                 data-testid="button-reset-timers"
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
-                Reset Timers
+                Réinitialiser les minuteries
               </Button>
 
               <Button
@@ -432,7 +432,7 @@ export default function AdminControls({
                 data-testid="button-flash-animation"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
-                Flash All
+                Flash général
               </Button>
 
               <Button
@@ -442,7 +442,7 @@ export default function AdminControls({
                 data-testid="button-warning-animation"
               >
                 <TestTube2 className="w-4 h-4 mr-2" />
-                Warning
+                Avertissement
               </Button>
 
               <Button
@@ -452,7 +452,7 @@ export default function AdminControls({
                 data-testid="button-export-text"
               >
                 <Download className="w-4 h-4 mr-2" />
-                Export TXT
+                Exporter TXT
               </Button>
 
               <Button
@@ -462,7 +462,7 @@ export default function AdminControls({
                 data-testid="button-export-json"
               >
                 <Download className="w-4 h-4 mr-2" />
-                Export JSON
+                Exporter JSON
               </Button>
             </div>
           </Card>

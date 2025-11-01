@@ -55,7 +55,7 @@ This chat application requires a functional, utility-focused design optimized fo
 - Input area: h-20, px-6, border-t
 - Message bubbles: max-w-3xl, p-4, rounded-xl
 
-*Right Panel (Gnoir Admin - Conditional): w-80*
+*Right Panel (pronBOT Admin - Conditional): w-80*
 - Panel header: p-4, border-b
 - Control sections: p-4, space-y-6
 - Pending messages queue: space-y-3

@@ -23,13 +23,13 @@ export default function PendingMessages({
       <div className="flex items-center gap-2">
         <Clock className="w-4 h-4 text-muted-foreground" />
         <h3 className="text-sm font-semibold uppercase tracking-wide">
-          Pending Approval ({pendingMessages.length})
+          En attente de validation ({pendingMessages.length})
         </h3>
       </div>
 
       {pendingMessages.length === 0 ? (
         <Card className="p-6 text-center">
-          <p className="text-sm text-muted-foreground">No pending messages</p>
+          <p className="text-sm text-muted-foreground">Aucun message en attente</p>
         </Card>
       ) : (
         <ScrollArea className="h-[300px]">
@@ -64,7 +64,7 @@ export default function PendingMessages({
                       data-testid={`button-approve-${message.id}`}
                     >
                       <Check className="w-4 h-4 mr-1" />
-                      Approve
+                      Valider
                     </Button>
                     <Button
                       size="sm"
@@ -74,7 +74,7 @@ export default function PendingMessages({
                       data-testid={`button-reject-${message.id}`}
                     >
                       <X className="w-4 h-4 mr-1" />
-                      Reject
+                      Rejeter
                     </Button>
                     <Button
                       size="sm"
@@ -84,7 +84,7 @@ export default function PendingMessages({
                       data-testid={`button-force-${message.id}`}
                     >
                       <FastForward className="w-4 h-4 mr-1" />
-                      Force
+                      Forcer
                     </Button>
                   </div>
                 </div>

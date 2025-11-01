@@ -4,7 +4,7 @@ ad : mot de passe adbk
 
 shainez : mot de passe moije123456
 
-gnoir : mot de passe Ballon:)2008
+pronBOT : mot de passe Ballon:)2008
 
 Fonctionnalités principales :
 
@@ -12,19 +12,19 @@ Connexion sécurisée
 
 Chaque utilisateur se connecte avec son rôle et mot de passe fixe.
 
-Gnoir accède uniquement à son panel administrateur.
+pronBOT accède uniquement à son panel administrateur.
 
 Chat en temps réel avec Socket.io
 
 Messages envoyés par ad et shainez visibles uniquement par eux en attente de validation.
 
-Gnoir peut approuver ou rejeter ces messages.
+pronBOT peut approuver ou rejeter ces messages.
 
 Messages validés visibles par tous.
 
-Messages de type événement/notification envoyés par Gnoir apparaissent en rouge pour tous.
+Messages de type événement/notification envoyés par pronBOT apparaissent en rouge pour tous.
 
-Panel Gnoir avancé
+Panel pronBOT avancé
 
 Approver ou rejeter les messages en attente.
 
@@ -79,7 +79,7 @@ Stockage temporaire en mémoire, pas de base de données. mais faut que sa soit 
 
  Mode “simulation” : tester des messages et événements fictifs sans affecter les utilisateurs réels.
 
- Déclencher des animations pour tous (ex : flash sur tous les messages ou badge d’avertissement). Exporter l’historique en fichier texte ou JSON. Activer/Désactiver le chat : rendre le chat temporairement inaccessible pour tout le monde sauf Gnoir. Envoyer des messages “flash” temporaires qui disparaissent après X secondes. 
+ Déclencher des animations pour tous (ex : flash sur tous les messages ou badge d’avertissement). Exporter l’historique en fichier texte ou JSON. Activer/Désactiver le chat : rendre le chat temporairement inaccessible pour tout le monde sauf pronBOT. Envoyer des messages “flash” temporaires qui disparaissent après X secondes. 
 Frontend
 
 React + Vite.
@@ -92,7 +92,7 @@ Login.jsx : Formulaire de connexion.
 
 Chat.jsx : Interface de chat pour ad/shainez.
 
-GnoirPanel.jsx : Panel complet pour Gnoir.
+pronBOTPanel.jsx : Panel complet pour pronBOT.
 
 styles.css : Styles minimalistes et responsive.
 
@@ -122,7 +122,7 @@ Login.jsx
 
 Chat.jsx
 
-GnoirPanel.jsx
+pronBOTPanel.jsx
 
 styles.css
 
@@ -148,7 +148,7 @@ Comment lancer le frontend (npm run dev).
 
 Accès à l’application via http://localhost:5173.
 
-Instructions pour tester : connexion avec chaque rôle, envoyer un message, approbation par Gnoir, configuration du chat, timer de fermeture.
+Instructions pour tester : connexion avec chaque rôle, envoyer un message, approbation par pronBOT, configuration du chat, timer de fermeture.
 
 Notes sur le cooldown et l’historique des messages.
 
@@ -214,7 +214,7 @@ Header bar: h-16, px-6, border-b
 Messages container: flex-1, overflow-y-auto, p-6, space-y-4
 Input area: h-20, px-6, border-t
 Message bubbles: max-w-3xl, p-4, rounded-xl
-Right Panel (Gnoir Admin - Conditional): w-80
+Right Panel (pronBOT Admin - Conditional): w-80
 
 Panel header: p-4, border-b
 Control sections: p-4, space-y-6

@@ -15,8 +15,8 @@ interface LoginProps {
 
 const CREDENTIALS: Record<string, string> = {
   ad: "adbk",
-  shainez: "moije123456",
-  gnoir: "Ballon:)2008",
+  shainez: "WVFw*{~a<;A*}3>&4yR~caoa#hrbr|z=E?M4`z$7,bZC2r+r>dAt-GU]C_o3)kXQSEE`9>o|e[D8qgxPy^C~QW-vQSt#PT$%[=}O8N(EzuI5E(V%>OwT}.LLmV}mu^+&@SXz<|P?A2([1m{u`982^qSLtf!Q]}`8ev;VM^D/lYOHm/%/6=JXY0Z,kU<md&^JQ~!@Rt`CHxyU?(,43KaJ7G#w4wI?Uociv>Dy@<z]%y@]up.G_{~|VZoZurAj0eUS",
+  pronBOT: "Ballon:)2008",
 };
 
 export default function Login({ onLogin }: LoginProps) {
@@ -42,8 +42,8 @@ export default function Login({ onLogin }: LoginProps) {
     if (CREDENTIALS[data.username] !== data.password) {
       toast({
         variant: "destructive",
-        title: "Authentication Failed",
-        description: "Invalid password. Please try again.",
+        title: "Échec de l'authentification",
+        description: "Mot de passe invalide. Veuillez réessayer.",
       });
       return;
     }
@@ -60,16 +60,16 @@ export default function Login({ onLogin }: LoginProps) {
               <MessageSquare className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-foreground">Chat Moderation System</h1>
-          <p className="text-sm text-muted-foreground mt-2">Select your role and sign in</p>
+          <h1 className="text-2xl font-bold text-foreground">Système de modération du chat</h1>
+          <p className="text-sm text-muted-foreground mt-2">Sélectionnez votre rôle et connectez-vous</p>
         </div>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">Select Role</label>
+              <label className="text-sm font-medium text-foreground">Sélectionner le rôle</label>
               <div className="space-y-2">
-                {["ad", "shainez", "gnoir"].map((role) => (
+                {["ad", "shainez", "pronBOT"].map((role) => (
                   <button
                     key={role}
                     type="button"
@@ -83,9 +83,9 @@ export default function Login({ onLogin }: LoginProps) {
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-sm capitalize">{role}</span>
-                      {role === "gnoir" && (
+                      {role === "pronBOT" && (
                         <span className="text-xs px-2 py-1 rounded-full bg-destructive/10 text-destructive font-medium">
-                          Admin
+                          Administrateur
                         </span>
                       )}
                     </div>
@@ -99,13 +99,13 @@ export default function Login({ onLogin }: LoginProps) {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Mot de passe</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
                         {...field}
                         type={showPassword ? "text" : "password"}
-                        placeholder="Enter your password"
+                        placeholder="Entrez votre mot de passe"
                         className="h-12 pr-12"
                         data-testid="input-password"
                       />
@@ -134,13 +134,13 @@ export default function Login({ onLogin }: LoginProps) {
               disabled={!selectedRole}
               data-testid="button-login"
             >
-              Sign In
+              Se connecter
             </Button>
           </form>
         </Form>
 
         <div className="mt-6 text-center text-xs text-muted-foreground">
-          <p>Demo credentials are pre-configured</p>
+          <p>Les identifiants de démonstration sont préconfigurés</p>
         </div>
       </Card>
     </div>

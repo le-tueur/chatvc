@@ -45,10 +45,13 @@ export default function TimerDisplay({ timerEndTime }: TimerDisplayProps) {
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <Clock className={`w-4 h-4 ${isWarning ? "text-destructive" : "text-muted-foreground"}`} />
-            <span className="text-sm font-medium text-foreground">Chat Closing</span>
+            <span className="text-sm font-medium text-foreground">Fermeture du chat</span>
           </div>
           <div className={`text-2xl font-mono font-bold ${isWarning ? "text-destructive" : "text-foreground"}`}>
             {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+          </div>
+          <div className="mt-2 text-xs text-muted-foreground">
+            Les utilisateurs ne peuvent plus envoyer de messages pendant le compte à rebours.
           </div>
         </div>
         <Button

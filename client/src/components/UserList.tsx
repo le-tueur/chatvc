@@ -25,7 +25,7 @@ export default function UserList({ users, currentUsername, showHidden = false }:
         return "bg-blue-500";
       case "shainez":
         return "bg-purple-500";
-      case "gnoir":
+  case "pronBOT":
         return "bg-destructive";
       default:
         return "bg-muted";
@@ -65,12 +65,12 @@ export default function UserList({ users, currentUsername, showHidden = false }:
               </span>
               {isCurrentUser && (
                 <Badge variant="secondary" className="text-xs">
-                  You
+                  Vous
                 </Badge>
               )}
-              {user.role === "gnoir" && (
+              {user.role === "pronBOT" && (
                 <Badge variant="destructive" className="text-xs">
-                  Admin
+                  Administrateur
                 </Badge>
               )}
             </div>
@@ -84,7 +84,7 @@ export default function UserList({ users, currentUsername, showHidden = false }:
               {user.isHidden && (
                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <EyeOff className="w-3 h-3" />
-                  <span>Hidden</span>
+                  <span>Caché</span>
                 </div>
               )}
             </div>
@@ -99,7 +99,7 @@ export default function UserList({ users, currentUsername, showHidden = false }:
       <div className="flex items-center gap-2 mb-4">
         <Users className="w-5 h-5 text-muted-foreground" />
         <h2 className="text-lg font-semibold">
-          Users ({onlineUsers.length})
+          Utilisateurs connectés ({onlineUsers.length})
         </h2>
       </div>
 
@@ -108,7 +108,7 @@ export default function UserList({ users, currentUsername, showHidden = false }:
           {onlineUsers.length > 0 && (
             <div>
               <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                Online
+                En ligne
               </h3>
               <div className="space-y-2">
                 {onlineUsers.map(user => (
@@ -121,7 +121,7 @@ export default function UserList({ users, currentUsername, showHidden = false }:
           {offlineUsers.length > 0 && (
             <div className="mt-4">
               <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                Offline
+                Hors ligne
               </h3>
               <div className="space-y-2 opacity-60">
                 {offlineUsers.map(user => (
@@ -133,7 +133,7 @@ export default function UserList({ users, currentUsername, showHidden = false }:
 
           {visibleUsers.length === 0 && (
             <div className="text-center py-8">
-              <p className="text-sm text-muted-foreground">No users</p>
+              <p className="text-sm text-muted-foreground">Aucun utilisateur</p>
             </div>
           )}
         </div>
