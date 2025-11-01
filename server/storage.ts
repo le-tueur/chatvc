@@ -1,160 +1,179 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import type { User, Message, ChatConfig, MutedUser, BlockedWord } from "@shared/schema";
+import type {
+  User,
+  Message,
+  ChatConfig,
+  MutedUser,
+  BlockedWord,
+} from "@shared/schema";
+import { randomUUID } from "crypto";
 
-// Remplacer __dirname en ES Module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+export interface IStorage {
+  users: Map<string, User>;
+  messages: Message[];
+  config: ChatConfig;
+  mutedUsers: Map<string, MutedUser>;
+  blockedWords: Map<string, BlockedWord>;
+  typingUsers: Map<string, number>;
 
-const FILE_PATH = path.join(__dirname, "chat.json");
-
-function readStorage() {
-  try {
-    const raw = fs.readFileSync(FILE_PATH, "utf-8");
-    return JSON.parse(raw);
-  } catch {
-    return {
-      users: [],
-      messages: [],
-      mutedUsers: [],
-      blockedWords: [],
-      config: { enabled: true, cooldown: 0, simulationMode: false },
-    };
-  }
+  getUserById(id: string): User | undefined;
+  getUserByUsername(username: string): User | undefined;
+  addUser(user: User): void;
+  removeUser(userId: string): void;
+  updateUser(userId: string, updates: Partial<User>): void;
+  
+  addMessage(message: Message): void;
+  getMessages(): Message[];
+  getPendingMessages(): Message[];
+  getApprovedMessages(): Message[];
+  updateMessage(messageId: string, updates: Partial<Message>): void;
+  deleteMessage(messageId: string): void;
+  clearMessages(): void;
+  
+  getConfig(): ChatConfig;
+  updateConfig(updates: Partial<ChatConfig>): void;
+  
+  addMutedUser(mutedUser: MutedUser): void;
+  removeMutedUser(username: string): void;
+  getMutedUsers(): MutedUser[];
+  isUserMuted(username: string): boolean;
+  
+  addBlockedWord(word: string): void;
+  removeBlockedWord(word: string): void;
+  getBlockedWords(): BlockedWord[];
+  containsBlockedWord(text: string): boolean;
+  
+  setUserTyping(username: string): void;
+  removeUserTyping(username: string): void;
+  getTypingUsers(): string[];
 }
 
-function writeStorage(data: any) {
-  fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
-}
-
-export class FileStorage {
-  private data: {
-    users: User[];
-    messages: Message[];
-    mutedUsers: MutedUser[];
-    blockedWords: BlockedWord[];
-    config: ChatConfig;
-  };
+export class MemStorage implements IStorage {
+  users: Map<string, User>;
+  messages: Message[];
+  config: ChatConfig;
+  mutedUsers: Map<string, MutedUser>;
+  blockedWords: Map<string, BlockedWord>;
+  typingUsers: Map<string, number>;
 
   constructor() {
-    this.data = readStorage();
+    this.users = new Map();
+    this.messages = [];
+    this.config = {
+      enabled: true,
+      cooldown: 0,
+      simulationMode: false,
+    };
+    this.mutedUsers = new Map();
+    this.blockedWords = new Map();
+    this.typingUsers = new Map();
   }
 
-  // ------------------
-  // Users
-  // ------------------
   getUserById(id: string): User | undefined {
-    return this.data.users.find(u => u.id === id);
+    return this.users.get(id);
   }
 
   getUserByUsername(username: string): User | undefined {
-    return this.data.users.find(u => u.username === username);
-  }
-
-  addUser(user: User) {
-    this.data.users.push(user);
-    writeStorage(this.data);
-  }
-
-  removeUser(userId: string) {
-    this.data.users = this.data.users.filter(u => u.id !== userId);
-    writeStorage(this.data);
-  }
-
-  updateUser(userId: string, updates: Partial<User>) {
-    const user = this.getUserById(userId);
-    if (user) {
-      Object.assign(user, updates);
-      writeStorage(this.data);
-    }
-  }
-
-  // ------------------
-  // Messages
-  // ------------------
-  getMessages(): Message[] {
-    return this.data.messages;
-  }
-
-  getPendingMessages(): Message[] {
-    return this.data.messages.filter(m => m.status === "pending" && m.type === "normal");
-  }
-
-  getApprovedMessages(): Message[] {
-    return this.data.messages.filter(
-      m => m.status === "approved" || m.type === "event" || m.type === "flash" || m.forcePublished
+    return Array.from(this.users.values()).find(
+      (user) => user.username === username,
     );
   }
 
-  addMessage(message: Message) {
-    this.data.messages.push(message);
-    writeStorage(this.data);
+  addUser(user: User): void {
+    this.users.set(user.id, user);
   }
 
-  updateMessage(messageId: string, updates: Partial<Message>) {
-    const msg = this.data.messages.find(m => m.id === messageId);
-    if (msg) {
-      Object.assign(msg, updates);
-      writeStorage(this.data);
+  removeUser(userId: string): void {
+    this.users.delete(userId);
+  }
+
+  updateUser(userId: string, updates: Partial<User>): void {
+    const user = this.users.get(userId);
+    if (user) {
+      this.users.set(userId, { ...user, ...updates });
     }
   }
 
-  deleteMessage(messageId: string) {
-    this.data.messages = this.data.messages.filter(m => m.id !== messageId);
-    writeStorage(this.data);
+  addMessage(message: Message): void {
+    this.messages.push(message);
   }
 
-  clearMessages() {
-    this.data.messages = [];
-    writeStorage(this.data);
+  getMessages(): Message[] {
+    return this.messages;
   }
 
-  // ------------------
-  // Config
-  // ------------------
+  getPendingMessages(): Message[] {
+    return this.messages.filter(
+      (m) => m.status === "pending" && m.type === "normal"
+    );
+  }
+
+  getApprovedMessages(): Message[] {
+    return this.messages.filter(
+      (m) => m.status === "approved" || m.type === "event" || m.type === "flash" || m.forcePublished
+    );
+  }
+
+  updateMessage(messageId: string, updates: Partial<Message>): void {
+    const index = this.messages.findIndex((m) => m.id === messageId);
+    if (index !== -1) {
+      this.messages[index] = { ...this.messages[index], ...updates };
+    }
+  }
+
+  deleteMessage(messageId: string): void {
+    this.messages = this.messages.filter((m) => m.id !== messageId);
+  }
+
+  clearMessages(): void {
+    this.messages = [];
+  }
+
   getConfig(): ChatConfig {
-    return this.data.config;
+    return this.config;
   }
 
-  updateConfig(updates: Partial<ChatConfig>) {
-    Object.assign(this.data.config, updates);
-    writeStorage(this.data);
+  updateConfig(updates: Partial<ChatConfig>): void {
+    this.config = { ...this.config, ...updates };
   }
 
-  // ------------------
-  // Muted Users
-  // ------------------
-  addMutedUser(mutedUser: MutedUser) {
-    this.data.mutedUsers.push(mutedUser);
+  addMutedUser(mutedUser: MutedUser): void {
+    this.mutedUsers.set(mutedUser.username, mutedUser);
     const user = this.getUserByUsername(mutedUser.username);
     if (user) {
-      user.isMuted = true;
-      user.mutedUntil = mutedUser.mutedUntil;
+      this.updateUser(user.id, {
+        isMuted: true,
+        mutedUntil: mutedUser.mutedUntil,
+      });
     }
-    writeStorage(this.data);
   }
 
-  removeMutedUser(username: string) {
-    this.data.mutedUsers = this.data.mutedUsers.filter(mu => mu.username !== username);
+  removeMutedUser(username: string): void {
+    this.mutedUsers.delete(username);
     const user = this.getUserByUsername(username);
     if (user) {
-      user.isMuted = false;
-      user.mutedUntil = undefined;
+      this.updateUser(user.id, {
+        isMuted: false,
+        mutedUntil: undefined,
+      });
     }
-    writeStorage(this.data);
   }
 
   getMutedUsers(): MutedUser[] {
     const now = Date.now();
-    const active = this.data.mutedUsers.filter(mu => mu.mutedUntil > now);
-    const expired = this.data.mutedUsers.filter(mu => mu.mutedUntil <= now);
-    expired.forEach(mu => this.removeMutedUser(mu.username));
-    return active;
+    const activeMutes = Array.from(this.mutedUsers.values()).filter(
+      (mu) => mu.mutedUntil > now
+    );
+    
+    const expiredMutes = Array.from(this.mutedUsers.values()).filter(
+      (mu) => mu.mutedUntil <= now
+    );
+    expiredMutes.forEach((mu) => this.removeMutedUser(mu.username));
+    
+    return activeMutes;
   }
 
   isUserMuted(username: string): boolean {
-    const muted = this.data.mutedUsers.find(mu => mu.username === username);
+    const muted = this.mutedUsers.get(username);
     if (!muted) return false;
     if (muted.mutedUntil <= Date.now()) {
       this.removeMutedUser(username);
@@ -163,52 +182,50 @@ export class FileStorage {
     return true;
   }
 
-  // ------------------
-  // Blocked Words
-  // ------------------
-  addBlockedWord(word: string) {
-    if (!this.data.blockedWords.find(w => w.word === word.toLowerCase())) {
-      this.data.blockedWords.push({ word: word.toLowerCase(), addedAt: Date.now() });
-      writeStorage(this.data);
-    }
+  addBlockedWord(word: string): void {
+    this.blockedWords.set(word.toLowerCase(), {
+      word: word.toLowerCase(),
+      addedAt: Date.now(),
+    });
   }
 
-  removeBlockedWord(word: string) {
-    this.data.blockedWords = this.data.blockedWords.filter(w => w.word !== word.toLowerCase());
-    writeStorage(this.data);
+  removeBlockedWord(word: string): void {
+    this.blockedWords.delete(word.toLowerCase());
   }
 
   getBlockedWords(): BlockedWord[] {
-    return this.data.blockedWords;
+    return Array.from(this.blockedWords.values());
   }
 
   containsBlockedWord(text: string): boolean {
     const lowerText = text.toLowerCase();
-    return this.data.blockedWords.some(w => lowerText.includes(w.word));
+    return Array.from(this.blockedWords.keys()).some((word) =>
+      lowerText.includes(word)
+    );
   }
 
-  // ------------------
-  // Typing Users
-  // ------------------
-  private typingUsers: Map<string, number> = new Map();
-
-  setUserTyping(username: string) {
+  setUserTyping(username: string): void {
     this.typingUsers.set(username, Date.now());
   }
 
-  removeUserTyping(username: string) {
+  removeUserTyping(username: string): void {
     this.typingUsers.delete(username);
   }
 
   getTypingUsers(): string[] {
     const now = Date.now();
-    const active: string[] = [];
+    const activeTyping: string[] = [];
+    
     Array.from(this.typingUsers.entries()).forEach(([username, timestamp]) => {
-      if (now - timestamp < 5000) active.push(username);
-      else this.typingUsers.delete(username);
+      if (now - timestamp < 5000) {
+        activeTyping.push(username);
+      } else {
+        this.typingUsers.delete(username);
+      }
     });
-    return active;
+    
+    return activeTyping;
   }
 }
 
-export const storage = new FileStorage();
+export const storage = new MemStorage();
