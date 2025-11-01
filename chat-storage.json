@@ -30,6 +30,17 @@
       "timestamp": 1762034514426,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "9da5b08b-cf11-42af-92a1-77059fc48f42",
+      "userId": "c327e1b1-47e2-492d-b27b-da1833b2dff5",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "6123",
+      "timestamp": 1762034571946,
+      "status": "approved",
+      "type": "flash",
+      "flashDuration": 5
     }
   ],
   "mutedUsers": [],
