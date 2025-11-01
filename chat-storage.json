@@ -1,6 +1,17 @@
 {
   "users": [],
-  "messages": [],
+  "messages": [
+    {
+      "id": "e924c5c3-352c-4228-8d24-91bac3fc5a72",
+      "userId": "ef3d1034-5050-4bf8-8756-8889616aee78",
+      "username": "ad",
+      "role": "ad",
+      "content": "test 1",
+      "timestamp": 1762038667783,
+      "status": "approved",
+      "type": "normal"
+    }
+  ],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
