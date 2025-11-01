@@ -1,233 +1,209 @@
-// storage.ts
+import fs from "fs";
+import path from "path";
 import type { User, Message, ChatConfig, MutedUser, BlockedWord } from "@shared/schema";
-import { GITHUB_TOKEN, GITHUB_REPO, GITHUB_BRANCH } from "./config";
-import fetch from "node-fetch";
 
-export interface IStorage {
-  users: Map<string, User>;
-  messages: Message[];
-  config: ChatConfig;
-  mutedUsers: Map<string, MutedUser>;
-  blockedWords: Map<string, BlockedWord>;
-  typingUsers: Map<string, number>;
+const FILE_PATH = path.join(__dirname, "chat.json");
 
-  getUserById(id: string): User | undefined;
-  getUserByUsername(username: string): User | undefined;
-  addUser(user: User): void;
-  removeUser(userId: string): void;
-  updateUser(userId: string, updates: Partial<User>): void;
-
-  addMessage(message: Message): Promise<void>;
-  getMessages(): Message[];
-  getPendingMessages(): Message[];
-  getApprovedMessages(): Message[];
-  updateMessage(messageId: string, updates: Partial<Message>): Promise<void>;
-  deleteMessage(messageId: string): Promise<void>;
-  clearMessages(): Promise<void>;
-
-  getConfig(): ChatConfig;
-  updateConfig(updates: Partial<ChatConfig>): Promise<void>;
-
-  addMutedUser(mutedUser: MutedUser): void;
-  removeMutedUser(username: string): void;
-  getMutedUsers(): MutedUser[];
-  isUserMuted(username: string): boolean;
-
-  addBlockedWord(word: string): void;
-  removeBlockedWord(word: string): void;
-  getBlockedWords(): BlockedWord[];
-  containsBlockedWord(text: string): boolean;
-
-  setUserTyping(username: string): void;
-  removeUserTyping(username: string): void;
-  getTypingUsers(): string[];
-}
-
-interface GitHubFile {
-  sha: string;
-  content: string;
-}
-
-export class GitHubStorage implements IStorage {
-  users: Map<string, User> = new Map();
-  messages: Message[] = [];
-  config: ChatConfig = { enabled: true, cooldown: 0, simulationMode: false };
-  mutedUsers: Map<string, MutedUser> = new Map();
-  blockedWords: Map<string, BlockedWord> = new Map();
-  typingUsers: Map<string, number> = new Map();
-
-  private filePath = "chat-data.json";
-  private fileSha: string | null = null;
-
-  constructor() {}
-
-  // ---------------------------
-  // GitHub persistence
-  // ---------------------------
-  private async githubRequest(endpoint: string, method = "GET", body?: any) {
-    const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${this.filePath}${endpoint}`, {
-      method,
-      headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: body ? JSON.stringify(body) : undefined,
-    });
-    return res.json();
-  }
-
-  async loadFromGitHub() {
-    try {
-      const res: any = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${this.filePath}?ref=${GITHUB_BRANCH}`, {
-        headers: { Authorization: `Bearer ${GITHUB_TOKEN}` },
-      });
-      if (res.status === 404) {
-        console.log("⚠️ chat-data.json introuvable, initialisation d’un nouveau fichier.");
-        await this.saveToGitHub(); // créer le fichier
-        return;
-      }
-      const data: GitHubFile = await res.json();
-      this.fileSha = data.sha;
-      const decoded = Buffer.from(data.content, "base64").toString("utf-8");
-      const json = JSON.parse(decoded);
-      this.messages = json.messages || [];
-      this.config = json.config || this.config;
-      console.log("✅ chat-data.json chargé depuis GitHub");
-    } catch (err) {
-      console.error("❌ Erreur chargement chat-data.json:", err);
-    }
-  }
-
-  private async saveToGitHub() {
-    const body = {
-      message: "Update chat data",
-      content: Buffer.from(JSON.stringify({ messages: this.messages, config: this.config }, null, 2)).toString("base64"),
-      branch: GITHUB_BRANCH,
-      sha: this.fileSha || undefined,
+function readStorage() {
+  try {
+    const raw = fs.readFileSync(FILE_PATH, "utf-8");
+    return JSON.parse(raw);
+  } catch {
+    return {
+      users: [],
+      messages: [],
+      mutedUsers: [],
+      blockedWords: [],
+      config: { enabled: true, cooldown: 0, simulationMode: false },
     };
-    try {
-      const res: any = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${this.filePath}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      const json = await res.json();
-      this.fileSha = json.content?.sha;
-    } catch (err) {
-      console.error("❌ Erreur sauvegarde chat-data.json:", err);
-    }
+  }
+}
+
+function writeStorage(data: any) {
+  fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
+}
+
+export class FileStorage {
+  private data: {
+    users: User[];
+    messages: Message[];
+    mutedUsers: MutedUser[];
+    blockedWords: BlockedWord[];
+    config: ChatConfig;
+  };
+
+  constructor() {
+    this.data = readStorage();
   }
 
-  // ---------------------------
+  // ------------------
   // Users
-  // ---------------------------
+  // ------------------
   getUserById(id: string): User | undefined {
-    return this.users.get(id);
+    return this.data.users.find(u => u.id === id);
   }
+
   getUserByUsername(username: string): User | undefined {
-    return Array.from(this.users.values()).find((u) => u.username === username);
-  }
-  addUser(user: User): void { this.users.set(user.id, user); }
-  removeUser(userId: string): void { this.users.delete(userId); }
-  updateUser(userId: string, updates: Partial<User>): void {
-    const user = this.users.get(userId);
-    if (user) this.users.set(userId, { ...user, ...updates });
+    return this.data.users.find(u => u.username === username);
   }
 
-  // ---------------------------
-  // Messages
-  // ---------------------------
-  async addMessage(message: Message) {
-    this.messages.push(message);
-    await this.saveToGitHub();
+  addUser(user: User) {
+    this.data.users.push(user);
+    writeStorage(this.data);
   }
 
-  getMessages(): Message[] { return this.messages; }
-  getPendingMessages(): Message[] { return this.messages.filter(m => m.status === "pending" && m.type === "normal"); }
-  getApprovedMessages(): Message[] { return this.messages.filter(m => m.status === "approved" || m.type === "event" || m.type === "flash" || m.forcePublished); }
+  removeUser(userId: string) {
+    this.data.users = this.data.users.filter(u => u.id !== userId);
+    writeStorage(this.data);
+  }
 
-  async updateMessage(messageId: string, updates: Partial<Message>) {
-    const idx = this.messages.findIndex(m => m.id === messageId);
-    if (idx !== -1) {
-      this.messages[idx] = { ...this.messages[idx], ...updates };
-      await this.saveToGitHub();
+  updateUser(userId: string, updates: Partial<User>) {
+    const user = this.getUserById(userId);
+    if (user) {
+      Object.assign(user, updates);
+      writeStorage(this.data);
     }
   }
 
-  async deleteMessage(messageId: string) {
-    this.messages = this.messages.filter(m => m.id !== messageId);
-    await this.saveToGitHub();
+  // ------------------
+  // Messages
+  // ------------------
+  getMessages(): Message[] {
+    return this.data.messages;
   }
 
-  async clearMessages() {
-    this.messages = [];
-    await this.saveToGitHub();
+  getPendingMessages(): Message[] {
+    return this.data.messages.filter(m => m.status === "pending" && m.type === "normal");
   }
 
-  // ---------------------------
+  getApprovedMessages(): Message[] {
+    return this.data.messages.filter(
+      m => m.status === "approved" || m.type === "event" || m.type === "flash" || m.forcePublished
+    );
+  }
+
+  addMessage(message: Message) {
+    this.data.messages.push(message);
+    writeStorage(this.data);
+  }
+
+  updateMessage(messageId: string, updates: Partial<Message>) {
+    const msg = this.data.messages.find(m => m.id === messageId);
+    if (msg) {
+      Object.assign(msg, updates);
+      writeStorage(this.data);
+    }
+  }
+
+  deleteMessage(messageId: string) {
+    this.data.messages = this.data.messages.filter(m => m.id !== messageId);
+    writeStorage(this.data);
+  }
+
+  clearMessages() {
+    this.data.messages = [];
+    writeStorage(this.data);
+  }
+
+  // ------------------
   // Config
-  // ---------------------------
-  getConfig(): ChatConfig { return this.config; }
-  async updateConfig(updates: Partial<ChatConfig>) {
-    this.config = { ...this.config, ...updates };
-    await this.saveToGitHub();
+  // ------------------
+  getConfig(): ChatConfig {
+    return this.data.config;
   }
 
-  // ---------------------------
-  // Muted users
-  // ---------------------------
-  addMutedUser(mu: MutedUser): void {
-    this.mutedUsers.set(mu.username, mu);
-    const user = this.getUserByUsername(mu.username);
-    if (user) this.updateUser(user.id, { isMuted: true, mutedUntil: mu.mutedUntil });
+  updateConfig(updates: Partial<ChatConfig>) {
+    Object.assign(this.data.config, updates);
+    writeStorage(this.data);
   }
-  removeMutedUser(username: string): void {
-    this.mutedUsers.delete(username);
+
+  // ------------------
+  // Muted Users
+  // ------------------
+  addMutedUser(mutedUser: MutedUser) {
+    this.data.mutedUsers.push(mutedUser);
+    const user = this.getUserByUsername(mutedUser.username);
+    if (user) {
+      user.isMuted = true;
+      user.mutedUntil = mutedUser.mutedUntil;
+    }
+    writeStorage(this.data);
+  }
+
+  removeMutedUser(username: string) {
+    this.data.mutedUsers = this.data.mutedUsers.filter(mu => mu.username !== username);
     const user = this.getUserByUsername(username);
-    if (user) this.updateUser(user.id, { isMuted: false, mutedUntil: undefined });
+    if (user) {
+      user.isMuted = false;
+      user.mutedUntil = undefined;
+    }
+    writeStorage(this.data);
   }
+
   getMutedUsers(): MutedUser[] {
     const now = Date.now();
-    const active = Array.from(this.mutedUsers.values()).filter(mu => mu.mutedUntil > now);
-    const expired = Array.from(this.mutedUsers.values()).filter(mu => mu.mutedUntil <= now);
+    const active = this.data.mutedUsers.filter(mu => mu.mutedUntil > now);
+    const expired = this.data.mutedUsers.filter(mu => mu.mutedUntil <= now);
     expired.forEach(mu => this.removeMutedUser(mu.username));
     return active;
   }
+
   isUserMuted(username: string): boolean {
-    const mu = this.mutedUsers.get(username);
-    if (!mu) return false;
-    if (mu.mutedUntil <= Date.now()) { this.removeMutedUser(username); return false; }
+    const muted = this.data.mutedUsers.find(mu => mu.username === username);
+    if (!muted) return false;
+    if (muted.mutedUntil <= Date.now()) {
+      this.removeMutedUser(username);
+      return false;
+    }
     return true;
   }
 
-  // ---------------------------
-  // Blocked words
-  // ---------------------------
-  addBlockedWord(word: string): void { this.blockedWords.set(word.toLowerCase(), { word: word.toLowerCase(), addedAt: Date.now() }); }
-  removeBlockedWord(word: string): void { this.blockedWords.delete(word.toLowerCase()); }
-  getBlockedWords(): BlockedWord[] { return Array.from(this.blockedWords.values()); }
-  containsBlockedWord(text: string): boolean { return Array.from(this.blockedWords.keys()).some(word => text.toLowerCase().includes(word)); }
+  // ------------------
+  // Blocked Words
+  // ------------------
+  addBlockedWord(word: string) {
+    if (!this.data.blockedWords.find(w => w.word === word.toLowerCase())) {
+      this.data.blockedWords.push({ word: word.toLowerCase(), addedAt: Date.now() });
+      writeStorage(this.data);
+    }
+  }
 
-  // ---------------------------
-  // Typing
-  // ---------------------------
-  setUserTyping(username: string): void { this.typingUsers.set(username, Date.now()); }
-  removeUserTyping(username: string): void { this.typingUsers.delete(username); }
+  removeBlockedWord(word: string) {
+    this.data.blockedWords = this.data.blockedWords.filter(w => w.word !== word.toLowerCase());
+    writeStorage(this.data);
+  }
+
+  getBlockedWords(): BlockedWord[] {
+    return this.data.blockedWords;
+  }
+
+  containsBlockedWord(text: string): boolean {
+    const lowerText = text.toLowerCase();
+    return this.data.blockedWords.some(w => lowerText.includes(w.word));
+  }
+
+  // ------------------
+  // Typing Users
+  // ------------------
+  private typingUsers: Map<string, number> = new Map();
+
+  setUserTyping(username: string) {
+    this.typingUsers.set(username, Date.now());
+  }
+
+  removeUserTyping(username: string) {
+    this.typingUsers.delete(username);
+  }
+
   getTypingUsers(): string[] {
     const now = Date.now();
     const active: string[] = [];
-    this.typingUsers.forEach((ts, username) => {
-      if (now - ts < 5000) active.push(username);
+    Array.from(this.typingUsers.entries()).forEach(([username, timestamp]) => {
+      if (now - timestamp < 5000) active.push(username);
       else this.typingUsers.delete(username);
     });
     return active;
   }
 }
 
-// ---------------------------
-// Export instance
-// ---------------------------
-export const storage = new GitHubStorage();
+export const storage = new FileStorage();
