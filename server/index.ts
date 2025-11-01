@@ -1,21 +1,30 @@
 import express, { type Request, Response, NextFunction } from "express";
+import http from "http";
+import { Server as SocketServer } from "socket.io";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { storage } from "./storage";
 
 const app = express();
 
-declare module 'http' {
+declare module "http" {
   interface IncomingMessage {
-    rawBody: unknown
+    rawBody: unknown;
   }
 }
-app.use(express.json({
-  verify: (req, _res, buf) => {
-    req.rawBody = buf;
-  }
-}));
+
+app.use(
+  express.json({
+    verify: (req, _res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+);
 app.use(express.urlencoded({ extended: false }));
 
+// ---------------------------
+// Logging Middleware
+// ---------------------------
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -34,11 +43,9 @@ app.use((req, res, next) => {
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
-
       if (logLine.length > 80) {
         logLine = logLine.slice(0, 79) + "…";
       }
-
       log(logLine);
     }
   });
@@ -46,32 +53,104 @@ app.use((req, res, next) => {
   next();
 });
 
+// ---------------------------
+// Async Server Setup
+// ---------------------------
 (async () => {
-  const server = await registerRoutes(app);
+  const server = http.createServer(app);
+  const io = new SocketServer(server, {
+    cors: {
+      origin: "*",
+    },
+  });
 
+  await registerRoutes(app);
+
+  // ---------------------------
+  // SOCKET.IO - Gestion du chat
+  // ---------------------------
+  io.on("connection", (socket) => {
+    console.log("🟢 Nouveau client connecté:", socket.id);
+
+    // → Envoi des messages existants au nouvel utilisateur
+    socket.emit("chat:init", {
+      messages: storage.getApprovedMessages(),
+      config: storage.getConfig(),
+    });
+
+    // → Nouveau message
+    socket.on("chat:message", (msg) => {
+      const containsBadWord = storage.containsBlockedWord(msg.content);
+      const isMuted = storage.isUserMuted(msg.username);
+
+      if (isMuted) {
+        socket.emit("chat:error", "Vous êtes actuellement muet.");
+        return;
+      }
+
+      const message = {
+        ...msg,
+        id: msg.id || Math.random().toString(36).slice(2),
+        createdAt: Date.now(),
+        status: containsBadWord ? "pending" : "approved",
+      };
+
+      storage.addMessage(message);
+
+      if (message.status === "approved") {
+        io.emit("chat:newMessage", message);
+      } else {
+        io.emit("chat:pending", message);
+      }
+    });
+
+    // → Message approuvé ou rejeté par admin Gnoir
+    socket.on("chat:moderate", ({ id, action }) => {
+      if (action === "approve") {
+        storage.updateMessage(id, { status: "approved" });
+        const msg = storage.getMessages().find((m) => m.id === id);
+        if (msg) io.emit("chat:newMessage", msg);
+      } else if (action === "reject") {
+        storage.updateMessage(id, { status: "rejected" });
+        io.emit("chat:remove", id);
+      }
+    });
+
+    // → Gestion typing (en train d’écrire)
+    socket.on("chat:typing", (username) => {
+      storage.setUserTyping(username);
+      io.emit("chat:typingUsers", storage.getTypingUsers());
+    });
+
+    socket.on("disconnect", () => {
+      console.log("🔴 Client déconnecté:", socket.id);
+    });
+  });
+
+  // ---------------------------
+  // Gestion des erreurs
+  // ---------------------------
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Erreur interne du serveur";
-
     res.status(status).json({ message });
-    throw err;
+    console.error("❌ ERREUR SERVEUR :", err);
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
+  // ---------------------------
+  // Setup Vite ou fichiers statiques
+  // ---------------------------
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // Toujours servir l'application sur le port spécifié dans la variable d'environnement PORT
-  // Les autres ports sont bloqués. Par défaut 5000 si non spécifié.
-  // Cela sert à la fois l'API et le client.
-  // C'est le seul port non bloqué.
-const PORT = parseInt(process.env.PORT || '5000', 10);
-server.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
-});
+  // ---------------------------
+  // Lancer le serveur
+  // ---------------------------
+  const PORT = parseInt(process.env.PORT || "5000", 10);
+  server.listen(PORT, () => {
+    console.log(`🚀 Serveur + Socket.io en écoute sur le port ${PORT}`);
+  });
 })();
