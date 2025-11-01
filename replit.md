@@ -48,6 +48,7 @@ A sophisticated real-time chat application with comprehensive moderation feature
   - Set message cooldown (0-∞ seconds)
   - Set chat closure timer (visible to all)
   - Simulation mode for testing
+  - **Chat direct mode** (nouveau) - Messages auto-approuvés sans validation
   
 - **User Management:**
   - Mute users for X minutes
@@ -64,8 +65,9 @@ A sophisticated real-time chat application with comprehensive moderation feature
   - Clear message history
   - Reset all timers and cooldowns
   - Trigger global animations (flash, warning)
-  - Export history (TXT or JSON format)
+  - Export history (TXT format détaillé ou JSON format complet)
   - Force-publish messages bypassing approval
+  - **Delete messages** (nouveau) - Suppression de n'importe quel message depuis le chat
 
 ### Design System
 
@@ -116,7 +118,7 @@ Message {
 }
 
 ChatConfig {
-  enabled, cooldown, timerEndTime?, simulationMode
+  enabled, cooldown, timerEndTime?, simulationMode, directChatEnabled
 }
 
 MutedUser { username, mutedUntil }
@@ -247,6 +249,39 @@ TypingUser { username, timestamp }
 - Production-ready with optional cleanup opportunities
 
 ## Recent Changes
+
+**2025-11-01:** ✅ NOUVELLES FONCTIONNALITÉS AJOUTÉES
+- **Mode Chat Direct:**
+  - Nouvel toggle dans le panneau admin pour activer/désactiver le chat direct
+  - Quand activé, les messages des utilisateurs sont auto-approuvés sans validation admin
+  - Champ `directChatEnabled` ajouté au ChatConfig (persiste dans GitHub)
+  
+- **Suppression de Messages:**
+  - Bouton de suppression visible au survol pour chaque message (uniquement pour pronBOT)
+  - Événement WebSocket `delete_message` pour supprimer les messages en temps réel
+  - Broadcast de la suppression à tous les clients connectés
+  
+- **Alerte Timer Critique:**
+  - Bannière rouge pleine largeur en haut de l'écran quand il reste <1 minute
+  - Message d'avertissement : "⚠️ ATTENTION : Le chat ferme dans moins d'une minute !"
+  - Animation pulse-glow pour attirer l'attention
+  - Timer normal (coin supérieur droit) pour >1 minute restant
+  
+- **Export TXT Amélioré:**
+  - Header détaillé avec date d'export, total de messages, statut du chat
+  - Format enrichi : Date complète + Heure + [RÔLE] + [TYPE] + Utilisateur: Message
+  - Métadonnées de configuration (enabled, directChatEnabled, cooldown)
+  - Footer de fin d'export
+  - Nom de fichier avec date : `chat-export-YYYY-MM-DD.txt`
+  
+- **Robustesse du Storage:**
+  - Correction du bug de chargement quand `storageData.config` est undefined
+  - Defaults explicites pour tous les champs de ChatConfig
+  - Protection contre les crashes au démarrage
+
+**Fichiers modifiés:** 8 fichiers (schema, storage, routes, useWebSocket, AdminControls, MessageList, Chat, TimerDisplay)
+**Fichiers créés:** utility.json (documentation des modifications)
+**Revue Architecte:** ✅ PASS
 
 **2024-11-01:** MVP COMPLETE + GitHub Persistence ✅
 - **GitHub Persistence Implemented:**
