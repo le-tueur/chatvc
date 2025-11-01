@@ -10,6 +10,16 @@
       "timestamp": 1762038888211,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "42cd46b2-8037-42b1-a1db-8242c9755161",
+      "userId": "4adbadb1-d9ad-43e4-9a07-73373083c88d",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Test suivant",
+      "timestamp": 1762038891684,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
