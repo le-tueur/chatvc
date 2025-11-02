@@ -1,18 +1,6 @@
 {
   "users": [],
-  "messages": [
-    {
-      "id": "9fc84812-2898-497b-b836-fb6ff7a5e29d",
-      "userId": "852184d7-08f5-4c43-9a1a-4332f7dddf14",
-      "username": "pronBOT",
-      "role": "pronBOT",
-      "content": "1520",
-      "timestamp": 1762094997767,
-      "status": "approved",
-      "type": "flash",
-      "flashDuration": 5
-    }
-  ],
+  "messages": [],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
