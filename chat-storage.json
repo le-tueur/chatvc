@@ -82,46 +82,6 @@
       "type": "event"
     },
     {
-      "id": "93d89893-806a-4656-ad15-e1460aa219ce",
-      "userId": "4adbadb1-d9ad-43e4-9a07-73373083c88d",
-      "username": "shainez",
-      "role": "shainez",
-      "content": "Quoi encore ?",
-      "timestamp": 1762038907689,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "e9199f38-1f38-4bb8-8efe-b8392fed2cc3",
-      "userId": "4adbadb1-d9ad-43e4-9a07-73373083c88d",
-      "username": "shainez",
-      "role": "shainez",
-      "content": "Ta finis ?",
-      "timestamp": 1762038941023,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "90208469-a34c-4cba-ac05-00fd4446d5ee",
-      "userId": "4adbadb1-d9ad-43e4-9a07-73373083c88d",
-      "username": "shainez",
-      "role": "shainez",
-      "content": "T’es la ?",
-      "timestamp": 1762038951607,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "2ba33764-2c0f-429a-a0ec-75a156f73b61",
-      "userId": "4adbadb1-d9ad-43e4-9a07-73373083c88d",
-      "username": "shainez",
-      "role": "shainez",
-      "content": "Le bot ?",
-      "timestamp": 1762038958543,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
       "id": "50387fd4-8dd4-4e7a-ad58-713c73bf15c4",
       "userId": "a0db9fcc-1666-4ecb-ac91-0587e51fb83a",
       "username": "shainez",
