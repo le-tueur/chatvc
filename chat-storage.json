@@ -1,6 +1,17 @@
 {
   "users": [],
-  "messages": [],
+  "messages": [
+    {
+      "id": "c13955fe-b70f-41b8-8cf3-0db1c77db6c6",
+      "userId": "3e520d4e-355e-4965-972c-f10600d0f5a1",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Le bot ?",
+      "timestamp": 1762105740863,
+      "status": "pending",
+      "type": "normal"
+    }
+  ],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
