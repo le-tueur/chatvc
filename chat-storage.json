@@ -4,9 +4,9 @@
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
-    "directChatEnabled": true
+    "directChatEnabled": false
   }
 }
