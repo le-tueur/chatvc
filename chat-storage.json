@@ -540,6 +540,16 @@
       "timestamp": 1762204303768,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "1aa6cde2-ebf0-488a-af73-a86ceecd15b6",
+      "userId": "c23ffdb9-fc56-4a2d-85dc-eefc4c4d5eb7",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Veuillez noter que les jours ne seront pas modifiables. Merci. Temps restant : 19 minutes.",
+      "timestamp": 1762204306900,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
