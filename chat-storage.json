@@ -1298,7 +1298,7 @@
   "config": {
     "enabled": false,
     "cooldown": 0,
-    "simulationMode": false,
-    "directChatEnabled": false
+    "simulationMode": true,
+    "directChatEnabled": true
   }
 }
