@@ -68,7 +68,7 @@
       "role": "shainez",
       "content": "Ad ?",
       "timestamp": 1762203664847,
-      "status": "pending",
+      "status": "approved",
       "type": "normal"
     },
     {
@@ -78,7 +78,7 @@
       "role": "shainez",
       "content": "Tu dors ??",
       "timestamp": 1762203683054,
-      "status": "pending",
+      "status": "approved",
       "type": "normal"
     },
     {
@@ -98,7 +98,7 @@
       "role": "shainez",
       "content": "Ad ?",
       "timestamp": 1762203704840,
-      "status": "pending",
+      "status": "approved",
       "type": "normal"
     }
   ],
