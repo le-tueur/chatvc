@@ -1280,23 +1280,12 @@
       "timestamp": 1762205164841,
       "status": "approved",
       "type": "event"
-    },
-    {
-      "id": "8a5fdf3c-1112-4d38-b00c-e522869c44db",
-      "userId": "c23ffdb9-fc56-4a2d-85dc-eefc4c4d5eb7",
-      "username": "pronBOT",
-      "role": "pronBOT",
-      "content": "suppression des messages relatifs au retour du chat.",
-      "timestamp": 1762205203535,
-      "status": "approved",
-      "type": "flash",
-      "flashDuration": 20
     }
   ],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
-    "enabled": false,
+    "enabled": true,
     "cooldown": 0,
     "simulationMode": true,
     "directChatEnabled": true
