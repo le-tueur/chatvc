@@ -1320,6 +1320,16 @@
       "timestamp": 1762205089309,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "d577efed-ffab-45a8-81a8-b7220a6cd2e4",
+      "userId": "c23ffdb9-fc56-4a2d-85dc-eefc4c4d5eb7",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Directive active : en cas de divulgation d'informations personnelles, fermeture immédiate après premier avertissement.",
+      "timestamp": 1762205164841,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
