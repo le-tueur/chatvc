@@ -1650,6 +1650,16 @@
       "timestamp": 1762205534041,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "8523c940-06b4-42d4-bc6a-27b41189cffe",
+      "userId": "c23ffdb9-fc56-4a2d-85dc-eefc4c4d5eb7",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "\"prenom\"",
+      "timestamp": 1762205558876,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
