@@ -1395,7 +1395,7 @@
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
-    "enabled": false,
+    "enabled": true,
     "cooldown": 0,
     "simulationMode": true,
     "directChatEnabled": true
