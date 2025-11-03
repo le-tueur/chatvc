@@ -110,6 +110,16 @@
       "timestamp": 1762128798657,
       "status": "pending",
       "type": "normal"
+    },
+    {
+      "id": "38679a19-75db-4faf-965a-50378fb25177",
+      "userId": "fc067859-61c2-4838-a0c0-e736855a903b",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Salut il est possible de remplacer le samedi par le mercredi et faire plus tôt lundi mercredi vendredi si c’est bon pour tout le monde ?",
+      "timestamp": 1762129167091,
+      "status": "pending",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
