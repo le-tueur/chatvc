@@ -490,6 +490,16 @@
       "timestamp": 1762204267040,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "00800afe-69d5-4b46-8894-e58f89caf561",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Un centime",
+      "timestamp": 1762204275285,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
