@@ -1280,6 +1280,16 @@
       "timestamp": 1762205164841,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "b2c9432e-9b5a-4cd7-8454-b9636ebc838c",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Tu as pas le droit",
+      "timestamp": 1762205232190,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
