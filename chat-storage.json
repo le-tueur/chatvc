@@ -260,6 +260,16 @@
       "timestamp": 1762204007888,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "3ea7f07b-3730-4e7a-bea6-930d94cb0dba",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Je pense pas que y’a un bot dans cette histoire",
+      "timestamp": 1762204023029,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
