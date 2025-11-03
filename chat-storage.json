@@ -580,6 +580,16 @@
       "timestamp": 1762202397742,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "30b82b02-3e0a-4f23-a3ac-ffe435ee9ece",
+      "userId": "9e3753c8-7216-4171-988e-1fd5a61e5ec7",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Merci",
+      "timestamp": 1762202599539,
+      "status": "pending",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
