@@ -1380,6 +1380,16 @@
       "timestamp": 1762205316884,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "1c7c9be6-e0d1-460a-97d8-bcb6ea65ae23",
+      "userId": "c23ffdb9-fc56-4a2d-85dc-eefc4c4d5eb7",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "\"Pour un prénom on fait rien de mal\"",
+      "timestamp": 1762205336294,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
