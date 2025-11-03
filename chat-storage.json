@@ -570,6 +570,16 @@
       "timestamp": 1762200776594,
       "status": "pending",
       "type": "normal"
+    },
+    {
+      "id": "13f9699c-e43c-45a0-8ada-11529805fe9d",
+      "userId": "c23ffdb9-fc56-4a2d-85dc-eefc4c4d5eb7",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "problème technique ouverture a 22h.",
+      "timestamp": 1762202397742,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
