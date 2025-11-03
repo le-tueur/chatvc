@@ -48,7 +48,7 @@
       "role": "shainez",
       "content": "Ad ?",
       "timestamp": 1762203608215,
-      "status": "pending",
+      "status": "approved",
       "type": "normal"
     },
     {
@@ -58,7 +58,7 @@
       "role": "shainez",
       "content": "T’es la ?",
       "timestamp": 1762203621295,
-      "status": "pending",
+      "status": "approved",
       "type": "normal"
     }
   ],
