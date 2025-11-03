@@ -850,6 +850,16 @@
       "timestamp": 1762204667307,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "e6ab1e24-0ac6-4e55-aa9b-c689a5d1f998",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Vous êtes un bon peuple mais a cause de ce qui se passe la frontière ouverte ras pa ses porte tout de suite",
+      "timestamp": 1762204685407,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
