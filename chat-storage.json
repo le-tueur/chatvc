@@ -1651,6 +1651,16 @@
       "status": "approved",
       "type": "flash",
       "flashDuration": 20
+    },
+    {
+      "id": "b2101db2-8178-4c32-a4be-d94619725595",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Oui ou non",
+      "timestamp": 1762205534041,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
