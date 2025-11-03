@@ -1480,6 +1480,16 @@
       "timestamp": 1762205395166,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "1c27ec47-78b1-4f50-9929-538bdf903bd2",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Le bot abuse",
+      "timestamp": 1762205399622,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
