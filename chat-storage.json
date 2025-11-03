@@ -370,6 +370,16 @@
       "timestamp": 1762198897447,
       "status": "pending",
       "type": "normal"
+    },
+    {
+      "id": "fba7e8f8-7ff6-4cb6-bd3d-4f542e00cd4f",
+      "userId": "5c756aff-55d8-444c-b800-a8e231e102be",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Le bot !",
+      "timestamp": 1762198962080,
+      "status": "pending",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
