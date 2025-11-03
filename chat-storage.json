@@ -320,6 +320,16 @@
       "timestamp": 1762204072978,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "f463b53a-9b0c-4d23-b349-8602894faccc",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "C’est bientôt finis",
+      "timestamp": 1762204081733,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
