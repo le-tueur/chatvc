@@ -690,6 +690,16 @@
       "timestamp": 1762204479175,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "840f7aa6-4ce6-4c18-aa5f-f3f987c19fbe",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Enfaite j’ai suivis l’actualité tu as vue que le Maroc a obtenu le sahara c’est pas encore sûr mais bon ça serais bien de leurs laisser leurs liberté",
+      "timestamp": 1762204515101,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
