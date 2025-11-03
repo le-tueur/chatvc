@@ -530,6 +530,16 @@
       "timestamp": 1762204293039,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "f5808fc5-2ed4-4ff7-b2cf-31585af9b7d5",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Profite aussi",
+      "timestamp": 1762204303768,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
