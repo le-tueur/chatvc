@@ -290,6 +290,16 @@
       "timestamp": 1762198545409,
       "status": "pending",
       "type": "normal"
+    },
+    {
+      "id": "fad2c31a-00b9-4407-984e-6ce45aa18c06",
+      "userId": "0c8dffe7-d6ca-4dab-86a5-d42a44cf5faf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Le bot répond sérieux là !",
+      "timestamp": 1762198587854,
+      "status": "pending",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
