@@ -80,6 +80,16 @@
       "timestamp": 1762203683054,
       "status": "pending",
       "type": "normal"
+    },
+    {
+      "id": "7ab3c782-9d5e-4558-8376-6327224a4525",
+      "userId": "c23ffdb9-fc56-4a2d-85dc-eefc4c4d5eb7",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "30 minutes...",
+      "timestamp": 1762203685073,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
