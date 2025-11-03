@@ -1130,6 +1130,16 @@
       "timestamp": 1762204863970,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "4a49054b-3b0b-4eb8-9240-f26484ea73fb",
+      "userId": "b7d9c9ba-81a2-4977-9022-1efad17b2167",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Main dans la main",
+      "timestamp": 1762204868384,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
