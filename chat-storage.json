@@ -1660,6 +1660,16 @@
       "timestamp": 1762205558876,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "abfd1b6f-5837-4016-aed8-315ff92e7608",
+      "userId": "a86eaef5-6275-4c24-a706-81acb10e0acb",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Ouverture du programme dans 3 jours : vendredi 7 novembre à 21h00.",
+      "timestamp": 1762301178065,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
