@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export type UserRole = "ad" | "shainez" | "pronBOT";
+export type UserRole = "ad" | "shainez" | "pronBOT" | "pronbote";
 
 export interface User {
   id: string;
@@ -10,6 +10,7 @@ export interface User {
   isMuted: boolean;
   mutedUntil?: number;
   isHidden: boolean;
+  isBot?: boolean;
 }
 
 export interface Message {
@@ -84,4 +85,36 @@ export const chatConfigSchema = z.object({
   cooldown: z.number().min(0).optional(),
   timerMinutes: z.number().min(0).optional(),
   directChatEnabled: z.boolean().optional(),
+});
+
+export interface BotConfig {
+  enabled: boolean;
+  autoModeration: boolean;
+  detectPrivateMessaging: boolean;
+  autoApprove: boolean;
+  respondToUsers: boolean;
+  respondToAdmins: boolean;
+  monitorChat: boolean;
+  privateMessagingKeywords: string[];
+  blockedWords: string[];
+  personality: {
+    userTone: "cold" | "neutral" | "friendly";
+    adminTone: "cold" | "neutral" | "friendly" | "joyful";
+  };
+}
+
+export const botCommandSchema = z.object({
+  command: z.string().min(1),
+});
+
+export type BotCommandInput = z.infer<typeof botCommandSchema>;
+
+export const updateBotConfigSchema = z.object({
+  enabled: z.boolean().optional(),
+  autoModeration: z.boolean().optional(),
+  detectPrivateMessaging: z.boolean().optional(),
+  autoApprove: z.boolean().optional(),
+  respondToUsers: z.boolean().optional(),
+  respondToAdmins: z.boolean().optional(),
+  monitorChat: z.boolean().optional(),
 });

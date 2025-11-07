@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import type { Message, User, ChatConfig, MutedUser, BlockedWord } from "@shared/schema";
+import type { Message, User, ChatConfig, MutedUser, BlockedWord, BotConfig } from "@shared/schema";
 
 export interface WebSocketMessage {
   type: string;
@@ -10,11 +10,14 @@ export interface ChatState {
   messages: Message[];
   users: User[];
   config: ChatConfig;
+  botConfig?: BotConfig;
   mutedUsers: MutedUser[];
   blockedWords: BlockedWord[];
   typingUsers: string[];
   pendingMessages: Message[];
   flashMessages: Map<string, number>;
+  botPlan?: string;
+  botCommand?: string;
 }
 
 export function useWebSocket(username: string | null, role: string | null) {
@@ -23,11 +26,14 @@ export function useWebSocket(username: string | null, role: string | null) {
     messages: [],
     users: [],
     config: { enabled: true, cooldown: 0, simulationMode: false, directChatEnabled: false },
+    botConfig: undefined,
     mutedUsers: [],
     blockedWords: [],
     typingUsers: [],
     pendingMessages: [],
     flashMessages: new Map(),
+    botPlan: undefined,
+    botCommand: undefined,
   });
   const socketRef = useRef<WebSocket | null>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout>();
@@ -56,6 +62,7 @@ export function useWebSocket(username: string | null, role: string | null) {
             messages: data.messages || [],
             users: data.users || [],
             config: data.config || prev.config,
+            botConfig: data.botConfig,
             mutedUsers: data.mutedUsers || [],
             blockedWords: data.blockedWords || [],
             pendingMessages: data.pendingMessages || [],
@@ -173,6 +180,29 @@ export function useWebSocket(username: string | null, role: string | null) {
             ...prev,
             messages: prev.messages.filter(m => m.id !== data.messageId),
             pendingMessages: prev.pendingMessages.filter(m => m.id !== data.messageId),
+          }));
+          break;
+
+        case "bot_command_plan":
+          setChatState(prev => ({
+            ...prev,
+            botPlan: data.plan,
+            botCommand: data.command,
+          }));
+          break;
+
+        case "bot_config_update":
+          setChatState(prev => ({
+            ...prev,
+            botConfig: data.config,
+          }));
+          break;
+
+        case "bot_command_executed":
+          setChatState(prev => ({
+            ...prev,
+            botPlan: undefined,
+            botCommand: undefined,
           }));
           break;
       }
@@ -314,6 +344,24 @@ export function useWebSocket(username: string | null, role: string | null) {
     }
   }, []);
 
+  const sendBotCommand = useCallback((command: string) => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify({ type: "bot_command", command }));
+    }
+  }, []);
+
+  const executeBotCommand = useCallback((command: string) => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify({ type: "bot_execute_command", command }));
+    }
+  }, []);
+
+  const updateBotConfig = useCallback((config: Partial<BotConfig>) => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify({ type: "update_bot_config", config }));
+    }
+  }, []);
+
   return {
     isConnected,
     chatState,
@@ -336,5 +384,8 @@ export function useWebSocket(username: string | null, role: string | null) {
     triggerAnimation,
     exportHistory,
     deleteMessage,
+    sendBotCommand,
+    executeBotCommand,
+    updateBotConfig,
   };
 }

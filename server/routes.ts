@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
 import { GitHubStorage } from "./github-storage";
+import { BotService } from "./bot-service";
 import type { User, Message, UserRole, ChatConfig } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -11,6 +12,7 @@ if (!githubToken) {
 }
 
 export const storage = new GitHubStorage(githubToken);
+let botService: BotService;
 
 interface WebSocketClient extends WebSocket {
   userId?: string;
@@ -28,6 +30,16 @@ const CREDENTIALS: Record<string, string> = {
 export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize GitHub storage
   await storage.initialize();
+  
+  // Initialize bot service
+  const useOllama = !!process.env.OLLAMA_BASE_URL;
+  botService = new BotService(storage, useOllama);
+  
+  if (useOllama) {
+    console.log("🤖 Bot service initialized with Ollama/Mistral");
+  } else {
+    console.log("🤖 Bot service initialized with mock AI (set OLLAMA_BASE_URL to enable Ollama)");
+  }
   
   const httpServer = createServer(app);
   
@@ -169,6 +181,15 @@ function handleWebSocketMessage(
     case "send_warning":
       handleSendWarning(ws, message, wss);
       break;
+    case "bot_command":
+      handleBotCommand(ws, message, wss);
+      break;
+    case "bot_execute_command":
+      handleBotExecuteCommand(ws, message, wss);
+      break;
+    case "update_bot_config":
+      handleUpdateBotConfig(ws, message, wss);
+      break;
   }
 }
 
@@ -203,9 +224,10 @@ function handleAuth(ws: WebSocketClient, message: any, wss: WebSocketServer) {
       messages: storage.getApprovedMessages(),
       users: Array.from(storage.users.values()),
       config: storage.getConfig(),
+      botConfig: role === "pronBOT" ? storage.getBotConfig() : undefined,
       mutedUsers: storage.getMutedUsers(),
       blockedWords: storage.getBlockedWords(),
-  pendingMessages: role === "pronBOT" ? storage.getPendingMessages() : [],
+      pendingMessages: role === "pronBOT" ? storage.getPendingMessages() : [],
     })
   );
 
@@ -262,12 +284,30 @@ const newMessage: Message = {
 
   if (autoApprove) {
     broadcast(wss, { type: "message", message: newMessage });
+    
+    if (ws.role !== "pronBOT" && ws.role !== "pronbote") {
+      botService.processMessage(newMessage, ws.role!).catch(error => {
+        console.error("Bot processing error:", error);
+      });
+      
+      if (ws.role === "ad" || ws.role === "shainez") {
+        botService.respondToUser(newMessage, (data: any) => broadcast(wss, data)).catch(error => {
+          console.error("Bot response error:", error);
+        });
+      }
+    }
+    
+    if (ws.role === "pronBOT") {
+      botService.respondToAdmin(newMessage, (data: any) => broadcast(wss, data)).catch(error => {
+        console.error("Bot admin response error:", error);
+      });
+    }
   } else {
     ws.send(JSON.stringify({ type: "pending_message", message: newMessage }));
     
     wss.clients.forEach((client) => {
       const c = client as WebSocketClient;
-  if (c.readyState === WebSocket.OPEN && c.role === "pronBOT") {
+      if (c.readyState === WebSocket.OPEN && c.role === "pronBOT") {
         c.send(JSON.stringify({ type: "pending_message", message: newMessage }));
       }
     });
@@ -663,6 +703,69 @@ function handleSendWarning(
 
   storage.addMessage(warningMessage);
   broadcast(wss, { type: "message", message: warningMessage });
+}
+
+function handleBotCommand(
+  ws: WebSocketClient,
+  message: any,
+  wss: WebSocketServer
+) {
+  if (ws.role !== "pronBOT") return;
+
+  const { command } = message;
+  if (!command) return;
+
+  botService.handleCommand(command, ws.role!).then(result => {
+    ws.send(JSON.stringify({ 
+      type: "bot_command_plan", 
+      plan: result.plan,
+      command: command
+    }));
+  }).catch(error => {
+    console.error("Bot command error:", error);
+    ws.send(JSON.stringify({ 
+      type: "error", 
+      message: "Erreur lors du traitement de la commande" 
+    }));
+  });
+}
+
+function handleBotExecuteCommand(
+  ws: WebSocketClient,
+  message: any,
+  wss: WebSocketServer
+) {
+  if (ws.role !== "pronBOT") return;
+
+  const { command } = message;
+  if (!command) return;
+
+  botService.executeCommand(command, ws.role!, (data: any) => broadcast(wss, data)).then(() => {
+    ws.send(JSON.stringify({ 
+      type: "bot_command_executed", 
+      success: true 
+    }));
+  }).catch(error => {
+    console.error("Bot execute error:", error);
+    ws.send(JSON.stringify({ 
+      type: "error", 
+      message: "Erreur lors de l'exécution de la commande" 
+    }));
+  });
+}
+
+function handleUpdateBotConfig(
+  ws: WebSocketClient,
+  message: any,
+  wss: WebSocketServer
+) {
+  if (ws.role !== "pronBOT") return;
+
+  const { config } = message;
+  if (!config) return;
+
+  storage.updateBotConfig(config);
+  broadcast(wss, { type: "bot_config_update", config: storage.getBotConfig() });
 }
 
 function broadcast(wss: WebSocketServer, data: any) {

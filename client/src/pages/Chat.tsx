@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWebSocket } from "@/hooks/useWebSocket";
 import MessageList from "@/components/MessageList";
 import MessageInput from "@/components/MessageInput";
@@ -7,6 +7,7 @@ import TypingIndicator from "@/components/TypingIndicator";
 import TimerDisplay from "@/components/TimerDisplay";
 import PendingMessages from "@/components/PendingMessages";
 import AdminControls from "@/components/AdminControls";
+import BotCommandPanel from "@/components/BotCommandPanel";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LogOut, Settings, MessageSquare, Shield } from "lucide-react";
@@ -45,7 +46,18 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
     triggerAnimation,
     exportHistory,
     deleteMessage,
+    sendBotCommand,
+    executeBotCommand,
+    updateBotConfig,
   } = useWebSocket(username, role);
+
+  const handleSendBotCommand = (command: string) => {
+    sendBotCommand(command);
+  };
+
+  const handleExecuteBotCommand = (command: string) => {
+    executeBotCommand(command);
+  };
 
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -132,6 +144,15 @@ export default function Chat({ username, role, onLogout }: ChatProps) {
                       onApprove={approveMessage}
                       onReject={rejectMessage}
                       onForcePublish={forcePublish}
+                    />
+
+                    <BotCommandPanel
+                      botConfig={chatState.botConfig}
+                      botPlan={chatState.botPlan}
+                      botCommand={chatState.botCommand}
+                      onSendCommand={handleSendBotCommand}
+                      onExecuteCommand={handleExecuteBotCommand}
+                      onUpdateConfig={updateBotConfig}
                     />
 
                     <AdminControls

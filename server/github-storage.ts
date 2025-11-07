@@ -4,6 +4,7 @@ import type {
   ChatConfig,
   MutedUser,
   BlockedWord,
+  BotConfig,
 } from "@shared/schema";
 import { IStorage } from "./storage";
 
@@ -26,19 +27,23 @@ interface GitHubStorageData {
 const GITHUB_REPO = "le-tueur/chatvc";
 const GITHUB_BRANCH = "main";
 const GITHUB_STORAGE_FILE = "chat-storage.json";
+const GITHUB_BOT_CONFIG_FILE = "bot-config.json";
 const GITHUB_API_BASE = "https://api.github.com";
 
 export class GitHubStorage implements IStorage {
   users: Map<string, User>;
   messages: Message[];
   config: ChatConfig;
+  botConfig: BotConfig;
   mutedUsers: Map<string, MutedUser>;
   blockedWords: Map<string, BlockedWord>;
   typingUsers: Map<string, number>;
   
   private githubToken: string;
   private saveTimeout: NodeJS.Timeout | null = null;
+  private botConfigSaveTimeout: NodeJS.Timeout | null = null;
   private currentSha: string | null = null;
+  private botConfigSha: string | null = null;
   private isInitialized: boolean = false;
 
   constructor(githubToken: string) {
@@ -51,6 +56,24 @@ export class GitHubStorage implements IStorage {
       simulationMode: false,
       directChatEnabled: false,
     };
+    this.botConfig = {
+      enabled: true,
+      autoModeration: true,
+      detectPrivateMessaging: true,
+      autoApprove: false,
+      respondToUsers: true,
+      respondToAdmins: true,
+      monitorChat: true,
+      privateMessagingKeywords: [
+        "insta", "instagram", "snap", "snapchat", "whatsapp", "telegram",
+        "discord", "messenger", "dm", "privé", "pv", "mp", "message privé"
+      ],
+      blockedWords: ["insulte", "connard", "con", "merde"],
+      personality: {
+        userTone: "cold",
+        adminTone: "joyful",
+      },
+    };
     this.mutedUsers = new Map();
     this.blockedWords = new Map();
     this.typingUsers = new Map();
@@ -61,6 +84,7 @@ export class GitHubStorage implements IStorage {
     
     try {
       await this.loadFromGitHub();
+      await this.loadBotConfigFromGitHub();
       this.isInitialized = true;
       console.log("✅ GitHub storage initialized successfully");
     } catch (error) {
@@ -188,6 +212,109 @@ export class GitHubStorage implements IStorage {
       console.error("Error saving to GitHub:", error);
       throw error;
     }
+  }
+
+  private async loadBotConfigFromGitHub(): Promise<void> {
+    try {
+      const url = `${GITHUB_API_BASE}/repos/${GITHUB_REPO}/contents/${GITHUB_BOT_CONFIG_FILE}?ref=${GITHUB_BRANCH}`;
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `token ${this.githubToken}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      });
+
+      if (response.status === 404) {
+        console.log("📝 No existing bot config found, using defaults");
+        await this.saveBotConfigToGitHub();
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      this.botConfigSha = data.sha;
+
+      const content = Buffer.from(data.content, "base64").toString("utf-8");
+      const loadedConfig: Partial<BotConfig> = JSON.parse(content);
+
+      this.botConfig = {
+        ...this.botConfig,
+        ...loadedConfig,
+      };
+
+      console.log("📥 Loaded bot configuration from GitHub");
+    } catch (error) {
+      console.error("Error loading bot config from GitHub:", error);
+    }
+  }
+
+  private scheduleBotConfigSave(): void {
+    if (this.botConfigSaveTimeout) {
+      clearTimeout(this.botConfigSaveTimeout);
+    }
+
+    this.botConfigSaveTimeout = setTimeout(() => {
+      this.saveBotConfigToGitHub().catch((error) => {
+        console.error("Failed to save bot config to GitHub:", error);
+      });
+    }, 1000);
+  }
+
+  async saveBotConfigToGitHub(): Promise<void> {
+    try {
+      const content = JSON.stringify(this.botConfig, null, 2);
+      const encodedContent = Buffer.from(content).toString("base64");
+
+      const url = `${GITHUB_API_BASE}/repos/${GITHUB_REPO}/contents/${GITHUB_BOT_CONFIG_FILE}`;
+      const body: any = {
+        message: `Update bot config - ${new Date().toISOString()}`,
+        content: encodedContent,
+        branch: GITHUB_BRANCH,
+      };
+
+      if (this.botConfigSha) {
+        body.sha = this.botConfigSha;
+      }
+
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          Authorization: `token ${this.githubToken}`,
+          Accept: "application/vnd.github.v3+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`GitHub API error: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      this.botConfigSha = data.content.sha;
+
+      console.log("💾 Saved bot config to GitHub successfully");
+    } catch (error) {
+      console.error("Error saving bot config to GitHub:", error);
+      throw error;
+    }
+  }
+
+  // Bot config methods
+  getBotConfig(): BotConfig {
+    return this.botConfig;
+  }
+
+  updateBotConfig(updates: Partial<BotConfig>): void {
+    this.botConfig = {
+      ...this.botConfig,
+      ...updates,
+    };
+    this.scheduleBotConfigSave();
   }
 
   // User methods
