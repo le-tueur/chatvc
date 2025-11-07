@@ -1730,6 +1730,16 @@
       "timestamp": 1762552863329,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "50213a74-9301-4e23-b021-c142fea45537",
+      "userId": "009c53b7-ddd9-40aa-a900-debe1275f585",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Encore un bot",
+      "timestamp": 1762553672749,
+      "status": "pending",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
