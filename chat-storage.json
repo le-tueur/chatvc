@@ -3180,6 +3180,16 @@
       "timestamp": 1762556184198,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "799bf805-ebb4-4177-add3-4fb19013433b",
+      "userId": "198322f6-dba3-43de-bf94-20273258fc71",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Moi aussi",
+      "timestamp": 1762556192230,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
