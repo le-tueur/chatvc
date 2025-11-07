@@ -2310,6 +2310,16 @@
       "timestamp": 1762555251803,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "55561192-2f5c-480f-9712-00d2d30041e0",
+      "userId": "e531f012-7b45-4074-ac01-1c2041669a94",
+      "username": "ad",
+      "role": "ad",
+      "content": "😔",
+      "timestamp": 1762555258085,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
