@@ -3240,6 +3240,16 @@
       "timestamp": 1762556234381,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "1aa67607-dd09-4447-bbe6-e1c40dac9247",
+      "userId": "198322f6-dba3-43de-bf94-20273258fc71",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "L’argent est pas un soucis pour moi jamais",
+      "timestamp": 1762556242550,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
