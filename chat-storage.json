@@ -2680,6 +2680,16 @@
       "timestamp": 1762555749534,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "9fe24c35-5825-4667-8ea0-6690cd04e518",
+      "userId": "3662d6d6-e388-4a0f-ad54-ab5f0b0bf6d2",
+      "username": "ad",
+      "role": "ad",
+      "content": "Je peut pas te laisser en danger",
+      "timestamp": 1762555758668,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
