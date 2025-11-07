@@ -4080,6 +4080,16 @@
       "timestamp": 1762557883207,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "f693f16c-88db-44fd-a39f-35194f2d1cd8",
+      "userId": "e109b37b-845a-49b1-b1dc-f05718dd2d07",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "test",
+      "timestamp": 1762557908197,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
