@@ -4062,7 +4062,12 @@
       "type": "event"
     }
   ],
-  "mutedUsers": [],
+  "mutedUsers": [
+    {
+      "username": "shainez",
+      "mutedUntil": 1762639241182
+    }
+  ],
   "blockedWords": [],
   "config": {
     "enabled": true,
