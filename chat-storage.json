@@ -4050,6 +4050,16 @@
       "timestamp": 1762557032724,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "264c593b-bce8-4b26-b02e-1d5d6e6c5b11",
+      "userId": "c2ec4fd0-57d7-40fb-951a-2100912cc040",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Fermeture automatique. Ouverture programmée dans 1 370 minutes (samedi à 23h00). Tous les utilisateurs seront mis en sourdine jusqu’à l’heure prévue.",
+      "timestamp": 1762557037561,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
