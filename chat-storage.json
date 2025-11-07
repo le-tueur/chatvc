@@ -1710,6 +1710,26 @@
       "timestamp": 1762549373425,
       "status": "pending",
       "type": "normal"
+    },
+    {
+      "id": "2ccdc865-d2f1-4300-9daf-e21c2b2af611",
+      "userId": "d0e64854-1824-4147-9cd7-a32e33a5275b",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": ".b salut",
+      "timestamp": 1762552863328,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "5af2828f-4f9c-4e00-ad32-48c6abd2078e",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "Bien sûr ! Je m'en occupe tout de suite. 😊",
+      "timestamp": 1762552863329,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
