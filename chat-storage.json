@@ -3930,6 +3930,26 @@
       "timestamp": 1762556948509,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "edd6bb9b-d4ce-42c3-8ae3-63be5f51a18d",
+      "userId": "c2ec4fd0-57d7-40fb-951a-2100912cc040",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Fermeture automatique dans 1 minutes. Ouverture programmée dans 1 370 minutes (samedi à 23h00). Tous les utilisateurs seront mis en sourdine jusqu’à l’heure prévue.",
+      "timestamp": 1762556955896,
+      "status": "approved",
+      "type": "event"
+    },
+    {
+      "id": "de744e41-df0e-4bc1-8f4e-bd95e4e42d61",
+      "userId": "513d4d0a-07cc-4628-b134-20665defd649",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Jamais il aurais réussi",
+      "timestamp": 1762556957250,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
