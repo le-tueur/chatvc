@@ -1920,6 +1920,16 @@
       "timestamp": 1762554806613,
       "status": "pending",
       "type": "normal"
+    },
+    {
+      "id": "7b9d81fb-3735-4cf8-bc5e-c50bcefb3723",
+      "userId": "41053849-19c1-453f-9ee3-a8f552ff7954",
+      "username": "ad",
+      "role": "ad",
+      "content": "😔",
+      "timestamp": 1762554832816,
+      "status": "pending",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
