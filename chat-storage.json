@@ -3990,6 +3990,26 @@
       "timestamp": 1762556991425,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "fe25fde6-f923-4f6f-a67f-4d4386ec8dae",
+      "userId": "513d4d0a-07cc-4628-b134-20665defd649",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Moi je suis vierge dieu merci",
+      "timestamp": 1762556995889,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "9498b7b5-3e01-44be-a7c8-5cc9e82eae89",
+      "userId": "c2ec4fd0-57d7-40fb-951a-2100912cc040",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Fermeture automatique dans 10sec. Ouverture programmée dans 1 370 minutes (samedi à 23h00). Tous les utilisateurs seront mis en sourdine jusqu’à l’heure prévue.",
+      "timestamp": 1762556997151,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
