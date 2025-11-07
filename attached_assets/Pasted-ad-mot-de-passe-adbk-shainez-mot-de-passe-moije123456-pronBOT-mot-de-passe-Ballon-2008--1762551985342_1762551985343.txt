@@ -1,0 +1,182 @@
+ad : mot de passe adbk
+
+shainez : mot de passe moije123456
+
+pronBOT : mot de passe Ballon:)2008
+
+Fonctionnalités principales :
+
+Connexion sécurisée
+
+Chaque utilisateur se connecte avec son rôle et mot de passe fixe.
+
+pronBOT accède uniquement à son panel administrateur.
+
+Chat en temps réel avec Socket.io
+
+Messages envoyés par ad et shainez visibles uniquement par eux en attente de validation.
+
+pronBOT ou pronebot(ia) peut approuver ou rejeter ces messages.
+
+Messages validés visibles par tous.
+
+Messages de type événement/notification envoyés par pronBOT  et pronbote apparaissent en rouge pour tous.
+
+Panel pronBOT avancé
+petit panel entre l'user pronbot et l'ia pronbote pour le commander desfois exemple lui dire d'envoyer un message noraml dans le chat "..." ou d'envoyer un message systeme ou autre demande genre lancer minuteur dire autre chose fermer le chat dans x temps et preciser tous les 5 munite le temps restant au user etc le ia doit pouvoir interpreter ce que j'ecris et me montrer un plan de ce qu'il vas faire ou envoyer pour que je confirme avant qu'il fait 
+
+Approver ou rejeter les messages en attente.
+
+Activer/désactiver le chat.
+
+Définir un cooldown entre les messages pour ad/shainez.
+
+Configurer un timer de fermeture du chat visible par tous.
+
+Envoyer des messages événement/notification en rouge.
+
+Accéder à l’historique complet des messages et le vider si nécessaire.
+
+Ajouter/supprimer des utilisateurs fictifs pour tester le chat.
+
+Voir la liste des utilisateurs connectés en temps réel.
+
+Interface utilisateur
+
+Responsive pour mobile et desktop.
+
+Minimaliste mais claire.
+
+Messages validés, événements et notifications affichés distinctement.
+
+Timer de fermeture du chat affiché pour tous.
+
+le bot doit pouvoir faire tous ce que le admin peut faire et aussi lire constament le chat si ad et shainez parle de chose priver de messasagerie autre genre insta snap meme ecrit diferrenement il ferme direct le chat et met un message fermeture cause ...
+
+Répond aux users de manière froide, brève et autoritaire.
+
+Répond aux admins de manière joyeuse et collaborative.
+
+Modère les messages automatiquement (bloque les insultes, spam, etc.).
+
+Exécute des actions automatiques, comme ouvrir/fermer le chat.
+
+Reconnaît des commandes spéciales comme .b pour répondre froidement.
+
+A tous les droits d’admin côté chat (supprimer, modérer, gérer la file d’attente).
+
+🗂️ Structure des fichiers
+/chatvc-main
+ ├── public/               ← site web HTML, CSS, JS
+ │   ├── index.html
+ │   └── chat.js            ← frontend pour le chat
+ ├── server/               
+ │   └── server.js          ← backend Express pour API chat
+ ├── bot/                  
+ │   ├── botLogic.js        ← logique bot, communication avec Mistral
+ │   └── personaPrompt.txt  ← personnalité / règles bot
+ ├── package.json
+ └── Dockerfile             ← pour déploiement Render + Ollama + Mistral
+
+🛠️ /bot/personaPrompt.txt
+Tu es FroidBot.
+- Avec les utilisateurs : tu es froid, bref et autoritaire. Tu réponds uniquement aux messages pertinents.
+- Avec les admins : tu es joyeux, bavard et collaboratif.
+- Tu as tous les droits sur le chat : modération, suppression, ouverture/fermeture.
+- Si un message commence par ".b", tu réponds froidement.
+- Si un message contient des insultes, tu le bloques et marques "à modérer".
+- Si on te dit "ouvre le chat dans X minutes", tu réponds "Je le ferai" et tu appelles la fonction open_chat_after(X) côté serveur.
+- Tu différencies automatiquement user/admin via le rôle reçu.
+
+🛠️ /bot/botLogic.js
+import { spawn } from "child_process";
+
+export async function askBot(message, role) {
+  const persona =
+    role === "admin"
+      ? "Tu es un assistant joyeux et collaboratif pour les administrateurs."
+      : "Tu es un modérateur froid et distant. Tu réponds brièvement aux utilisateurs, tu appliques les règles et refuses les insultes.";
+
+  const prompt = `${persona}\nMessage: ${message}`;
+
+  return new Promise((resolve) => {
+    const ollama = spawn("ollama", ["run", "mistral"], { stdio: ["pipe", "pipe", "pipe"] });
+    let output = "";
+    ollama.stdout.on("data", (data) => (output += data.toString()));
+    ollama.stdin.write(prompt);
+    ollama.stdin.end();
+    ollama.on("close", () => resolve(output.trim()));
+  });
+}
+
+🛠️ /server/server.js
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { askBot } from "../bot/botLogic.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../public")));
+
+// API chat
+app.post("/api/chat", async (req, res) => {
+  const { message, userRole } = req.body; // "admin" ou "user"
+  const reply = await askBot(message, userRole);
+  res.json({ reply });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Serveur en ligne sur le port ${PORT}`));
+
+🛠️ /public/chat.js (exemple frontend)
+async function sendMessage() {
+  const message = document.getElementById("message").value;
+  const userRole = window.isAdmin ? "admin" : "user"; // définir selon login/admin
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message, userRole }),
+  });
+  const data = await res.json();
+  document.getElementById("chat").innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+}
+
+// Optionnel : détection .b côté frontend pour trigger direct
+document.getElementById("sendBtn").addEventListener("click", sendMessage);
+
+🛠️ Dockerfile pour Render
+FROM node:20
+
+# Installe Ollama
+RUN curl -fsSL https://ollama.com/install.sh | sh
+
+# Télécharge le modèle Mistral
+RUN ollama pull mistral
+
+WORKDIR /app
+COPY . .
+
+RUN npm install
+
+# Lance Ollama + serveur
+CMD ["bash", "-c", "ollama serve & node server/server.js"]
+
+✅ Résumé du comportement
+
+Nouveau user : Bot répond froidement, modère et bloque les insultes.
+
+Admin : Bot répond joyeusement, peut exécuter toutes les actions automatiquement.
+
+Commandes .b : réponses froides instantanées.
+
+Action différée : messages “ouvre le chat dans X minutes” déclenchent open_chat_after(X) côté serveur.
+
+Modération automatique : tous les messages suspects ou insultes sont bloqués avant affichage.
+
+et aussi dans le panel ajoute un mini paneel ia ou je peux envoyer ducoup des direction desfois activer desactiver certain fonctionne ou tous simplement le commander 
+
+tu peux cree un fichier dans github du meme type que le chat pour sauvegarder dynamiquement les parametre du bot activer desactivreer etc genre sur un json dans le github
