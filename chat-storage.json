@@ -6440,6 +6440,16 @@
       "timestamp": 1762641742570,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "34564a1f-8229-4b5a-926f-be39b81ffce6",
+      "userId": "7f88ef9e-d2ce-4aaa-92f4-bc6f4fefafd3",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Le montant est de l’ordre de 65 euros. Peux-tu confirmer que tu pourras payer ?",
+      "timestamp": 1762641757358,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
