@@ -3890,16 +3890,6 @@
       "timestamp": 1762633549835,
       "status": "approved",
       "type": "normal"
-    },
-    {
-      "id": "f3777d4a-fb22-4676-8dd7-bbfd67c040a9",
-      "userId": "5e409dd8-e813-42d7-b52d-5c5ea6d2cd50",
-      "username": "ad",
-      "role": "ad",
-      "content": "/move gameId=xyz789 player=Alice from=e2 to=e4",
-      "timestamp": 1762634676225,
-      "status": "approved",
-      "type": "normal"
     }
   ],
   "mutedUsers": [
