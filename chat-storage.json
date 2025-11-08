@@ -4050,6 +4050,26 @@
       "timestamp": 1762639317141,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "85891766-a50c-461d-a424-d45f701b9f44",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Arrêt le bot",
+      "timestamp": 1762639325249,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "7895a1c9-cfc7-48fb-a804-9e9c13a60dae",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639325250,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
