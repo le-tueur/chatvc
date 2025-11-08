@@ -7532,12 +7532,7 @@
       "type": "normal"
     }
   ],
-  "mutedUsers": [
-    {
-      "username": "ad",
-      "mutedUntil": 1762644022048
-    }
-  ],
+  "mutedUsers": [],
   "blockedWords": [],
   "config": {
     "enabled": true,
