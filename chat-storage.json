@@ -4070,6 +4070,26 @@
       "timestamp": 1762639325250,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "ba9ede3b-2030-41c1-b042-ebfd4a27725d",
+      "userId": "7fdb6111-ddac-458c-b75c-4f0042033d76",
+      "username": "ad",
+      "role": "ad",
+      "content": "Nn le pronbote pq il dit ok",
+      "timestamp": 1762639329337,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "f65fe8c9-2fd9-4ff1-8455-b2b9b042957d",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639329337,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
