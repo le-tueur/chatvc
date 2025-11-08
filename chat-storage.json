@@ -4340,6 +4340,16 @@
       "timestamp": 1762616509256,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "f611459e-9684-4292-b6aa-48c332ceacc1",
+      "userId": "ee6f1706-3e2f-466b-996b-5e5381a433e0",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "je suis intransigeant. je ne change pas d'avis",
+      "timestamp": 1762616675910,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
