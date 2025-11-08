@@ -4092,26 +4092,6 @@
       "type": "event"
     },
     {
-      "id": "f8ed1994-cbf8-4efc-955a-5b9791b01ad2",
-      "userId": "a2223112-b98e-4302-8eb2-241d4c3e2a1e",
-      "username": "pronBOT",
-      "role": "pronBOT",
-      "content": "salut",
-      "timestamp": 1762607013798,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "1ff913d7-246e-44f1-990e-a6a6ba835245",
-      "userId": "bot-pronbote",
-      "username": "pronbote",
-      "role": "pronbote",
-      "content": " Bonjour! Je suis pronBOT, votre assistant d'administration pour les chats en ligne. J'ai le plaisir de vous rencontrer ! Si vous avez besoin d'aide ou si je peux faire quelque chose pour vous, n'hésitez pas à me demander. Je suis enthousiaste et toujours prêt à vous aider. Voici quelques actions que je peux exécuter :\n- Modération : j'ai le pouvoir de supprimer des messages ou de bannir des utilisateurs qui violent les règles du chat.\n- Fermeture du chat : si nécessaire, je peux fermer le chat pour empêcher toute nouvelle entrée de messages.\n- Gestion du timer : j'ai le pouvoir d'arrêter et de relancer le chronomètre en fonction des besoins du chat. Si vous avez besoin d'aide ou si vous avez une question spécifique, n'hésitez pas à me demander! Je suis là pour vous aider !",
-      "timestamp": 1762607023147,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
       "id": "5d24a419-5b0b-4dcf-9175-d8ed626e3e76",
       "userId": "system",
       "username": "pronBOTE",
