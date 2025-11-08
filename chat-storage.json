@@ -4130,6 +4130,46 @@
       "timestamp": 1762639368438,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "6c8bf3e0-8379-4a92-ae35-5a61798acebd",
+      "userId": "7fdb6111-ddac-458c-b75c-4f0042033d76",
+      "username": "ad",
+      "role": "ad",
+      "content": "Azz",
+      "timestamp": 1762639376011,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "7f9f92ea-8bfb-43b5-b83f-775411307108",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639376012,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "f4f79bbc-2922-4d4e-b54e-d726bcfdc810",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Arrêt le bot",
+      "timestamp": 1762639376417,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "7b0fe8de-d9a8-4b6f-95ad-2aa77dc0221f",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639376418,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
