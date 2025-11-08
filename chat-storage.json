@@ -4090,6 +4090,16 @@
       "timestamp": 1762557908197,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "f8ed1994-cbf8-4efc-955a-5b9791b01ad2",
+      "userId": "a2223112-b98e-4302-8eb2-241d4c3e2a1e",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "salut",
+      "timestamp": 1762607013798,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
