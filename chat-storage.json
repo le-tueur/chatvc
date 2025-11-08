@@ -6960,6 +6960,26 @@
       "timestamp": 1762643431002,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "cfa985d0-e7c2-4059-879d-d064e9e6b19c",
+      "userId": "48467fb8-39b0-43cc-b701-ee791b6290c7",
+      "username": "ad",
+      "role": "ad",
+      "content": "20€de l'heure",
+      "timestamp": 1762643441192,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "d93f3e3b-4794-407f-9f22-5c33f499ecc2",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Je fais payer",
+      "timestamp": 1762643441485,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
