@@ -4440,6 +4440,16 @@
       "timestamp": 1762619437233,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "7930bf77-59d4-4625-b119-818456cc8960",
+      "userId": "system",
+      "username": "Système",
+      "role": "pronBOT",
+      "content": "⏰ Le chat est fermé, fin du timer.",
+      "timestamp": 1762619497970,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
@@ -4450,10 +4460,9 @@
   ],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
-    "directChatEnabled": true,
-    "timerEndTime": 1762619497233
+    "directChatEnabled": true
   }
 }
