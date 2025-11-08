@@ -4130,6 +4130,26 @@
       "timestamp": 1762607072060,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "7ef9f986-a28b-4820-b29b-921c37db56e1",
+      "userId": "a2223112-b98e-4302-8eb2-241d4c3e2a1e",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "close le",
+      "timestamp": 1762607087940,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "2cca2402-10fe-47c9-b979-29282e7966e5",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Je suis désolé mais je ne peux pas réaliser d'actions spécifiques telles que fermer un chat ou exécuter des fonctions administratives sur votre serveur. Cependant, j'ai été conçu pour aider à faciliter la conversation, fournir des informations et éduquer les utilisateurs.",
+      "timestamp": 1762607089311,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
