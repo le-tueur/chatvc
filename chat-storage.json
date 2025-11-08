@@ -6390,6 +6390,27 @@
       "timestamp": 1762641669005,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "80c2fa74-2ad8-469e-a52a-844562d99084",
+      "userId": "7f88ef9e-d2ce-4aaa-92f4-bc6f4fefafd3",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "évènement spécial imminent",
+      "timestamp": 1762641676848,
+      "status": "approved",
+      "type": "flash",
+      "flashDuration": 15
+    },
+    {
+      "id": "fa7e29be-8b3a-4a92-b9aa-c43d7f688a79",
+      "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Donc j’espère c’est pas un coup bizarre de gnoir",
+      "timestamp": 1762641678566,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
