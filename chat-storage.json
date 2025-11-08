@@ -6540,6 +6540,26 @@
       "timestamp": 1762642219889,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "cfbc1056-9a59-4441-9a77-1852d2fbf401",
+      "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "C’est quoi ma condition",
+      "timestamp": 1762642229278,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "ae3d5077-a43c-4ea9-a480-dcb2190c4715",
+      "userId": "bot-pronbote",
+      "username": "Système",
+      "role": "pronbote",
+      "content": "⚠️ Message de shainez bloqué pour contenu inapproprié",
+      "timestamp": 1762642229278,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
