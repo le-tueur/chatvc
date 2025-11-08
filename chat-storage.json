@@ -7070,6 +7070,16 @@
       "timestamp": 1762643486354,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "e2826844-9557-472e-8741-1d47b811bd7b",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Il va nous laisser",
+      "timestamp": 1762643490189,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
