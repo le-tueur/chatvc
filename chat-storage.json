@@ -6300,6 +6300,16 @@
       "timestamp": 1762641621278,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "90d4ccf0-e40c-47f9-aee9-7980c1196e05",
+      "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Événement spécial",
+      "timestamp": 1762641632485,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
