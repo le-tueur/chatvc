@@ -7010,6 +7010,16 @@
       "timestamp": 1762643459559,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "028f18c9-614f-4611-8bbc-7f92e9f86251",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Si je commence ma formation",
+      "timestamp": 1762643464579,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
