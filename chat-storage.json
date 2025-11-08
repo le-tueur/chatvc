@@ -4580,6 +4580,26 @@
       "timestamp": 1762639596294,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "74132ec9-4db9-4b84-898f-4992a5ad6146",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Pour une formation dans je sais pas quoi",
+      "timestamp": 1762639608198,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "ddd20db6-ab0c-425d-ad42-8d8b15056da5",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639608199,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
