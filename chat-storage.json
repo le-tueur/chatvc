@@ -4740,6 +4740,26 @@
       "timestamp": 1762639711423,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "a5b73da5-4f73-45b9-bf16-fe8d9eff0372",
+      "userId": "1bfb837a-3004-45b9-a300-1af99bd7bf5b",
+      "username": "ad",
+      "role": "ad",
+      "content": "65euro aujourd'hui",
+      "timestamp": 1762639717912,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "fb5f3743-56f7-44f4-94fa-88ca7b212cdb",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639717913,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
