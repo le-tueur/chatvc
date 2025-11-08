@@ -4220,6 +4220,26 @@
       "timestamp": 1762639393844,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "99e49202-ea36-486a-82ba-ee2b9628ebf0",
+      "userId": "7fdb6111-ddac-458c-b75c-4f0042033d76",
+      "username": "ad",
+      "role": "ad",
+      "content": "G",
+      "timestamp": 1762639411433,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "3be6950e-ec10-45de-ad70-9736830a0b3e",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639411433,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
