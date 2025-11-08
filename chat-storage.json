@@ -7240,6 +7240,16 @@
       "timestamp": 1762643536170,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "2472299b-fc64-4cf1-b622-7508f090138e",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "C’est important",
+      "timestamp": 1762643538266,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
