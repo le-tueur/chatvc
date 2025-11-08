@@ -6840,6 +6840,16 @@
       "timestamp": 1762643322187,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "71efd5eb-4e72-45fc-8fe6-f99d141bc4cb",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "J’ai promis à gnoir de lui payer 350 € quand je commence ma formation",
+      "timestamp": 1762643340323,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
