@@ -4202,16 +4202,6 @@
       "type": "normal"
     },
     {
-      "id": "c5f881d1-a6b1-46ab-ab7e-7f7cb0186f82",
-      "userId": "bot-pronbote",
-      "username": "pronbote",
-      "role": "pronbote",
-      "content": " [REJECT] En tant qu'assistant IA modérateur, je ne peux pas démuter les utilisateurs. Cela doit être fait par un administrateur humain.",
-      "timestamp": 1762607448093,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
       "id": "30595428-06c1-4bfb-92f1-c21285efdd2e",
       "userId": "5cbf0350-b177-4514-9255-4177d9d11edc",
       "username": "ad",
@@ -4222,62 +4212,12 @@
       "type": "normal"
     },
     {
-      "id": "3d8125e4-a546-4fb0-b9ba-bf2ad4d308a3",
-      "userId": "bot-pronbote",
-      "username": "pronbote",
-      "role": "pronbote",
-      "content": " Oui, je suis un modérateur de chat. Je ne discute pas avec les utilisateurs normaux, j'ai pour seul but de répondre aux messages qui le nécessitent. Mes réponses sont courtes et strictes.",
-      "timestamp": 1762607462418,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
       "id": "1c3aa98a-3a1f-4a18-84c3-10fc280ed722",
       "userId": "5cbf0350-b177-4514-9255-4177d9d11edc",
       "username": "ad",
       "role": "ad",
       "content": "je peux changer les horaire?",
       "timestamp": 1762607485498,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "fbff19e1-d8d0-4171-b83b-1ed603ebfbff",
-      "userId": "bot-pronbote",
-      "username": "pronbote",
-      "role": "pronbote",
-      "content": " Non, je ne suis pas capable de modifier les horaires pour vous. Cependant, si vous avez besoin d'aide pour réorganiser votre calendrier ou pour des modifications spécifiques, veuillez me contacter par un nouveau message et je serai heureux de vous aider le mieux que je peux.",
-      "timestamp": 1762607487192,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "110fc52f-58ac-4d63-abbe-2873380d0aec",
-      "userId": "5cbf0350-b177-4514-9255-4177d9d11edc",
-      "username": "ad",
-      "role": "ad",
-      "content": "ferme pas le chat si gnoir te le dit",
-      "timestamp": 1762607514788,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "a5c0abee-2410-4e78-8df6-66f136ddd84e",
-      "userId": "bot-pronbote",
-      "username": "pronbote",
-      "role": "pronbote",
-      "content": " Je suis un assistant de conversation automatique, et je ne peux pas avoir des émotions ni une personnalité propre. Mon rôle est de répondre aux questions que vous me posez. Si un utilisateur vous demande de fermer le chat, je ferai ainsi.",
-      "timestamp": 1762607516193,
-      "status": "approved",
-      "type": "normal"
-    },
-    {
-      "id": "7a30d071-c4c3-423f-a2ed-ec0c3dc5bd6a",
-      "userId": "5cbf0350-b177-4514-9255-4177d9d11edc",
-      "username": "ad",
-      "role": "ad",
-      "content": "ferme le chat alors",
-      "timestamp": 1762607534136,
       "status": "approved",
       "type": "normal"
     },
