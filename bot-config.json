@@ -3,7 +3,7 @@
   "autoModeration": true,
   "detectPrivateMessaging": true,
   "autoApprove": false,
-  "respondToUsers": false,
+  "respondToUsers": true,
   "respondToAdmins": true,
   "monitorChat": true,
   "privateMessagingKeywords": [
