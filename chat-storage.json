@@ -7520,6 +7520,16 @@
       "timestamp": 1762643759561,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "579be3b9-ab06-40d1-8d13-48788033d05f",
+      "userId": "7be32cb1-94f8-487b-b9a3-0f97f7dcb7e9",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Je l’ai déjà mis en sourdine. Il voit encore tes messages, mais une fois que tu auras terminé, tu seras également mis en sourdine pour une durée indéterminée.",
+      "timestamp": 1762643767443,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
