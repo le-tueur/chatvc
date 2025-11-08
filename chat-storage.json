@@ -4230,6 +4230,26 @@
       "timestamp": 1762607462418,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "1c3aa98a-3a1f-4a18-84c3-10fc280ed722",
+      "userId": "5cbf0350-b177-4514-9255-4177d9d11edc",
+      "username": "ad",
+      "role": "ad",
+      "content": "je peux changer les horaire?",
+      "timestamp": 1762607485498,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "fbff19e1-d8d0-4171-b83b-1ed603ebfbff",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Non, je ne suis pas capable de modifier les horaires pour vous. Cependant, si vous avez besoin d'aide pour réorganiser votre calendrier ou pour des modifications spécifiques, veuillez me contacter par un nouveau message et je serai heureux de vous aider le mieux que je peux.",
+      "timestamp": 1762607487192,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
