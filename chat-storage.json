@@ -4320,6 +4320,26 @@
       "timestamp": 1762639445881,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "ec4d6d0a-dfbc-46eb-ad71-2531f84df13f",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Oui je sais bb mais laisse le ils ont oublier de arrêter le bot",
+      "timestamp": 1762639464161,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "ec9da6d6-b0b3-4f65-9c8d-434c68825ff8",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639464161,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
