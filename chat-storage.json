@@ -4210,6 +4210,26 @@
       "timestamp": 1762607448093,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "30595428-06c1-4bfb-92f1-c21285efdd2e",
+      "userId": "5cbf0350-b177-4514-9255-4177d9d11edc",
+      "username": "ad",
+      "role": "ad",
+      "content": "test",
+      "timestamp": 1762607461110,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "3d8125e4-a546-4fb0-b9ba-bf2ad4d308a3",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Oui, je suis un modérateur de chat. Je ne discute pas avec les utilisateurs normaux, j'ai pour seul but de répondre aux messages qui le nécessitent. Mes réponses sont courtes et strictes.",
+      "timestamp": 1762607462418,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
