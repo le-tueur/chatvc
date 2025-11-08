@@ -1,7 +1,7 @@
 {
-  "enabled": true,
-  "autoModeration": true,
-  "detectPrivateMessaging": true,
+  "enabled": false,
+  "autoModeration": false,
+  "detectPrivateMessaging": false,
   "autoApprove": false,
   "respondToUsers": false,
   "respondToAdmins": true,
