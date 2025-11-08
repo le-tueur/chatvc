@@ -1,5 +1,5 @@
 {
-  "enabled": true,
+  "enabled": false,
   "autoModeration": true,
   "detectPrivateMessaging": true,
   "autoApprove": false,
