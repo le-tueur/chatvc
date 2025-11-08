@@ -6700,6 +6700,16 @@
       "timestamp": 1762642922920,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "67687c4b-bbe0-4e14-83d8-9a04d4978b40",
+      "userId": "f0a3be8d-7faf-4673-b1b7-75bc518aad5d",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Étant donné que nous ne connaissons pas la date de la prochaine ouverture — qui pourrait ne jamais avoir lieu — vous serez mis en sourdine pour une durée de 999999999999999999999999999999999999999999999999999 minutes.",
+      "timestamp": 1762643028310,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
