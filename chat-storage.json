@@ -7220,6 +7220,26 @@
       "timestamp": 1762643530266,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "259a9bb8-7384-4589-98b6-b39cc59d2322",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Après ça c’est bon",
+      "timestamp": 1762643534226,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "dde188fa-d4a9-4264-99c3-c79ac5bbd4cf",
+      "userId": "464dc4ea-5305-4931-b22d-e96f205fc937",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "fermeture!",
+      "timestamp": 1762643536170,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
