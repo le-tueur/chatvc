@@ -8000,6 +8000,16 @@
       "timestamp": 1762644223688,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "fe4adc3b-7926-4e16-a8f8-39bc24672819",
+      "userId": "2dcbc0e0-91e0-4d47-98d5-8b96bc3e433e",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "bug : message perdu !",
+      "timestamp": 1762645289900,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
