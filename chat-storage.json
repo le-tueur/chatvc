@@ -4520,6 +4520,26 @@
       "timestamp": 1762639560151,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "0181c65d-f9c1-488f-ad13-d676146baef2",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Toujours prepa métier bb",
+      "timestamp": 1762639569937,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "445943f3-7981-44fa-b69a-62ecdd6d979b",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639569937,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
