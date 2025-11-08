@@ -7260,6 +7260,26 @@
       "timestamp": 1762643542230,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "f6a48336-cf3d-46d2-aa0e-8fd21715e805",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Bb",
+      "timestamp": 1762643546790,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "880ec06a-27f0-4b40-ab0f-f057cf4096a5",
+      "userId": "464dc4ea-5305-4931-b22d-e96f205fc937",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "fermeture!",
+      "timestamp": 1762643547635,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
