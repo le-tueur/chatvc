@@ -6490,6 +6490,26 @@
       "timestamp": 1762641824988,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "18718b63-0ca7-41b4-a38b-fba88282e4ad",
+      "userId": "b6197453-f02a-4cfd-80a5-9d19d22d36e1",
+      "username": "ad",
+      "role": "ad",
+      "content": "C'est impossible attend",
+      "timestamp": 1762641838800,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "56c60e3d-69e2-4b0d-8a05-2b259f4f969e",
+      "userId": "bot-pronbote",
+      "username": "Système",
+      "role": "pronbote",
+      "content": "⚠️ Chat fermé automatiquement - Mention de messagerie privée détectée (ad)",
+      "timestamp": 1762641838801,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
@@ -6500,7 +6520,7 @@
   ],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
