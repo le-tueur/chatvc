@@ -6570,12 +6570,32 @@
       "timestamp": 1762642232045,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "bb720be7-47eb-4fad-9149-fd85ed33744c",
+      "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "J’ai rien compris",
+      "timestamp": 1762642238542,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "0aa48dc2-eaa7-4739-a14a-4a42a6ce98d9",
+      "userId": "bot-pronbote",
+      "username": "Système",
+      "role": "pronbote",
+      "content": "⚠️ Chat fermé automatiquement - Mention de messagerie privée détectée (shainez)",
+      "timestamp": 1762642238543,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
