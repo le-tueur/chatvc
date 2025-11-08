@@ -6050,6 +6050,16 @@
       "timestamp": 1762641472087,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "7265330d-9be1-4385-83fe-2ac767239f87",
+      "userId": "e0899990-e763-4ddc-aa5e-c87a50d3253d",
+      "username": "ad",
+      "role": "ad",
+      "content": "Je vais lui donner l'argent qu'il me demande même si cela revient a me vider a petit feu",
+      "timestamp": 1762641474324,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
