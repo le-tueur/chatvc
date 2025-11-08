@@ -6090,6 +6090,16 @@
       "timestamp": 1762641496321,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "80451c74-0ae0-4537-97ee-41d6718c8fe5",
+      "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Quand je fais commandais ma formation",
+      "timestamp": 1762641502747,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
