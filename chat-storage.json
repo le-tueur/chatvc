@@ -4870,6 +4870,26 @@
       "timestamp": 1762640142494,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "fe1b9b0a-a3a0-466c-9845-bb39583b09c0",
+      "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Comment ça ?",
+      "timestamp": 1762640147791,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "6657021c-e510-41cb-8618-f73cc4e78d25",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762640147791,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
