@@ -1,3 +1,5 @@
+// server/services/ai-service.ts
+
 export interface AIMessage {
   role: "system" | "user" | "assistant";
   content: string;
@@ -42,12 +44,31 @@ export class OllamaMistralProvider implements IAIProvider {
         headers["Authorization"] = `Bearer ${this.authToken}`;
       }
 
+      // Prompt système renforcé (style directif et concis)
+      const SYSTEM_PROMPT = `
+Tu es pronBOT, un bot d'administration automatique pour un chat en ligne.
+
+Règles strictes :
+- Tes réponses sont courtes, claires et directes.
+- Ne donne jamais d'explication ou de politesse.
+- Ne parle pas d'autres sujets que la gestion du chat.
+- Si un message contient "ferme", exécute une action de fermeture du chat.
+- Si on dit "ferme dans X secondes/minutes", programme un timer interne.
+- Si tu reçois "[CLOSE_CHAT]", ferme immédiatement.
+- N’écris jamais autre chose que l’information nécessaire ou le code d’action.
+`;
+
+      const finalMessages: AIMessage[] = [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...messages,
+      ];
+
       const response = await fetch(`${this.baseUrl}/api/chat`, {
         method: "POST",
         headers,
         body: JSON.stringify({
           model: "mistral",
-          messages: messages.map(m => ({
+          messages: finalMessages.map(m => ({
             role: m.role,
             content: m.content,
           })),
@@ -60,15 +81,28 @@ export class OllamaMistralProvider implements IAIProvider {
       }
 
       const data = await response.json();
-      
+      const output = data.message?.content || "";
+
+      // Ajout de la gestion des délais (fermeture programmée)
+      const timerMatch = output.match(/ferme dans (\d+)\s*(sec|secondes|minutes|min)/i);
+      if (timerMatch) {
+        const delay = Number(timerMatch[1]);
+        const isMinutes = timerMatch[2].startsWith("min");
+        const ms = isMinutes ? delay * 60000 : delay * 1000;
+
+        setTimeout(() => {
+          console.log("Chat fermé automatiquement après délai.");
+        }, ms);
+      }
+
       return {
-        content: data.message?.content || "",
-        actions: this.extractActions(data.message?.content || ""),
+        content: output,
+        actions: this.extractActions(output),
       };
     } catch (error) {
       console.error("Error calling Ollama API:", error);
       return {
-        content: "Désolé, je rencontre un problème technique.",
+        content: "Erreur système.",
         actions: [],
       };
     }
@@ -80,17 +114,13 @@ export class OllamaMistralProvider implements IAIProvider {
     shouldModerate: boolean;
     suggestedAction?: string;
   }> {
-    const systemPrompt = `Tu es un modérateur de chat. Analyse ce message et détermine:
-1. S'il mentionne des applications de messagerie privée (Instagram, Snapchat, WhatsApp, Telegram, Discord, etc.)
-2. S'il contient des insultes ou du contenu inapproprié
-3. S'il doit être modéré
-
-Réponds UNIQUEMENT avec un objet JSON dans ce format exact:
+    const systemPrompt = `Tu es un modérateur automatique.
+Analyse ce message et réponds uniquement en JSON :
 {
   "containsPrivateMessaging": true/false,
   "containsInsults": true/false,
   "shouldModerate": true/false,
-  "suggestedAction": "description de l'action recommandée"
+  "suggestedAction": "courte description"
 }`;
 
     try {
@@ -127,7 +157,7 @@ Réponds UNIQUEMENT avec un objet JSON dans ce format exact:
 
   private extractActions(content: string): BotAction[] {
     const actions: BotAction[] = [];
-    
+
     if (content.includes("[CLOSE_CHAT]")) {
       actions.push({ type: "close_chat" });
     }
@@ -137,7 +167,18 @@ Réponds UNIQUEMENT avec un objet JSON dans ce format exact:
     if (content.includes("[REJECT]")) {
       actions.push({ type: "reject_message" });
     }
-    
+
+    // Timer automatique détecté dans la réponse
+    const match = content.match(/ferme dans (\d+)\s*(sec|secondes|minutes|min)/i);
+    if (match) {
+      const delay = Number(match[1]);
+      const isMinutes = match[2].startsWith("min");
+      actions.push({
+        type: "open_timer",
+        params: { delay: delay, unit: isMinutes ? "minutes" : "secondes" },
+      });
+    }
+
     return actions;
   }
 }
@@ -145,17 +186,25 @@ Réponds UNIQUEMENT avec un objet JSON dans ce format exact:
 export class MockAIProvider implements IAIProvider {
   async chat(messages: AIMessage[], context?: any): Promise<AIResponse> {
     const lastMessage = messages[messages.length - 1];
-    const isAdmin = context?.userRole === "pronBOT";
+    const message = lastMessage.content.toLowerCase();
 
-    if (isAdmin) {
+    // Simulation réaliste pour tests sans Ollama
+    if (/ferme dans (\d+)/i.test(message)) {
       return {
-        content: "Bien sûr ! Je m'en occupe tout de suite. 😊",
-        actions: [],
+        content: "Fermeture programmée.",
+        actions: [{ type: "open_timer", params: { delay: 60, unit: "secondes" } }],
+      };
+    }
+
+    if (message.includes("ferme")) {
+      return {
+        content: "[CLOSE_CHAT]",
+        actions: [{ type: "close_chat" }],
       };
     }
 
     return {
-      content: "Message reçu.",
+      content: "OK.",
       actions: [],
     };
   }
@@ -173,19 +222,15 @@ export class MockAIProvider implements IAIProvider {
     ];
     const insultKeywords = ["connard", "con", "merde", "putain"];
 
-    const containsPrivateMessaging = privateMessagingKeywords.some(keyword => 
-      lowerMessage.includes(keyword)
-    );
-    const containsInsults = insultKeywords.some(keyword => 
-      lowerMessage.includes(keyword)
-    );
+    const containsPrivateMessaging = privateMessagingKeywords.some(k => lowerMessage.includes(k));
+    const containsInsults = insultKeywords.some(k => lowerMessage.includes(k));
 
     return {
       containsPrivateMessaging,
       containsInsults,
       shouldModerate: containsPrivateMessaging || containsInsults,
-      suggestedAction: containsPrivateMessaging 
-        ? "Fermer le chat - mention de messagerie privée détectée"
+      suggestedAction: containsPrivateMessaging
+        ? "Fermer le chat - mention privée"
         : containsInsults
         ? "Bloquer le message - insulte détectée"
         : undefined,
