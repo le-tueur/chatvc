@@ -7960,6 +7960,16 @@
       "timestamp": 1762644163076,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "00c6e93e-1c18-4123-b451-c04dbb00f439",
+      "userId": "7be32cb1-94f8-487b-b9a3-0f97f7dcb7e9",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "BUG: fermeture des serveur",
+      "timestamp": 1762644169703,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
