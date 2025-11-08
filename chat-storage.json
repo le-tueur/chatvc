@@ -6600,6 +6600,16 @@
       "timestamp": 1762642726306,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "0e263d77-8de5-45ee-837f-fb667ea13d64",
+      "userId": "08286727-e001-4395-8a67-3da91e8260a5",
+      "username": "ad",
+      "role": "ad",
+      "content": "Je vais demander a mon patron pour faire un tarifs de nuit🫩 sa te va",
+      "timestamp": 1762642741000,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
