@@ -4300,16 +4300,6 @@
       "timestamp": 1762608206501,
       "status": "approved",
       "type": "normal"
-    },
-    {
-      "id": "8b539ac8-b71f-4336-a32a-725a4328754a",
-      "userId": "bot-pronbote",
-      "username": "pronbote",
-      "role": "pronbote",
-      "content": " [CLOSE_CHAT] Le chat s'en va se reposer dans 10 minutes, je te rappellerai toutes les 2 minutes pour tenir compte du temps restant. 💤",
-      "timestamp": 1762608239346,
-      "status": "approved",
-      "type": "normal"
     }
   ],
   "mutedUsers": [
