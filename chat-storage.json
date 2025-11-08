@@ -4560,6 +4560,26 @@
       "timestamp": 1762639577634,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "8bf200e9-2ada-41d2-907f-70d99a8f5a06",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Je vais basculer au CLRP DE LILLE",
+      "timestamp": 1762639596293,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "c4b5dc98-7306-4602-9eb2-fefbb6a6c9b4",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639596294,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
