@@ -4320,6 +4320,16 @@
       "timestamp": 1762616473749,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "ad69d494-b12e-4bdf-ac53-51357724b4bf",
+      "userId": "ee6f1706-3e2f-466b-996b-5e5381a433e0",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Veuillez noter que les heures ne seront pas modifiables. Merci",
+      "timestamp": 1762616503027,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
