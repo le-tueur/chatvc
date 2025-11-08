@@ -7680,6 +7680,16 @@
       "timestamp": 1762643877101,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "62ff8286-245a-4dd6-b75e-59acb55286aa",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Je peux pas faire comme les autres et trouver du travail temporaire plus les cours ma mère me laisse pas",
+      "timestamp": 1762643897715,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
