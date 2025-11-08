@@ -4390,6 +4390,16 @@
       "timestamp": 1762616771848,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "b83e44cd-55a8-4181-91c4-a37fd18acc9b",
+      "userId": "ee6f1706-3e2f-466b-996b-5e5381a433e0",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "/mute @ad 1300m",
+      "timestamp": 1762616821218,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
