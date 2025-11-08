@@ -6670,12 +6670,32 @@
       "timestamp": 1762642812288,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "1016b657-132a-466e-9013-90ca13949d56",
+      "userId": "9644f8b5-3c73-4ad3-a73d-c4e97fd74dab",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Impossible le samedi on parle à 23h00",
+      "timestamp": 1762642838615,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "fe569043-d8c5-4cdd-9bf1-8be128498021",
+      "userId": "bot-pronbote",
+      "username": "Système",
+      "role": "pronbote",
+      "content": "⚠️ Chat fermé automatiquement - Mention de messagerie privée détectée (shainez)",
+      "timestamp": 1762642838617,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
