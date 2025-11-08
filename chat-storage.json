@@ -7650,6 +7650,16 @@
       "timestamp": 1762643851083,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "471cf8b1-0c43-4f75-a788-9055d26fd587",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Je peux pas prendre de boulot",
+      "timestamp": 1762643857544,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
