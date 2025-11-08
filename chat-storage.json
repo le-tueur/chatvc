@@ -4250,6 +4250,26 @@
       "timestamp": 1762607487192,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "110fc52f-58ac-4d63-abbe-2873380d0aec",
+      "userId": "5cbf0350-b177-4514-9255-4177d9d11edc",
+      "username": "ad",
+      "role": "ad",
+      "content": "ferme pas le chat si gnoir te le dit",
+      "timestamp": 1762607514788,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "a5c0abee-2410-4e78-8df6-66f136ddd84e",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Je suis un assistant de conversation automatique, et je ne peux pas avoir des émotions ni une personnalité propre. Mon rôle est de répondre aux questions que vous me posez. Si un utilisateur vous demande de fermer le chat, je ferai ainsi.",
+      "timestamp": 1762607516193,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
