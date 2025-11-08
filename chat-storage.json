@@ -7550,6 +7550,16 @@
       "timestamp": 1762643786890,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "c0f364f8-f136-4fd6-abe3-583edf325165",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Pour lundi",
+      "timestamp": 1762643790275,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
