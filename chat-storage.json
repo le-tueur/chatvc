@@ -4320,7 +4320,7 @@
   ],
   "blockedWords": [],
   "config": {
-    "enabled": false,
+    "enabled": true,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
