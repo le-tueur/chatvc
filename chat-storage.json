@@ -3840,6 +3840,26 @@
       "timestamp": 1762619604147,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "020a984b-7dbb-45e1-872d-ae34585396e6",
+      "userId": "ee241553-23a5-463b-b0c4-4271055f64f0",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "test",
+      "timestamp": 1762633341095,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "65fd3c8b-262f-4f78-ae23-757a1db95e49",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762633341096,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
