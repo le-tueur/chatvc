@@ -6522,12 +6522,7 @@
       "type": "normal"
     }
   ],
-  "mutedUsers": [
-    {
-      "username": "shainez",
-      "mutedUntil": 1762642001454
-    }
-  ],
+  "mutedUsers": [],
   "blockedWords": [],
   "config": {
     "enabled": false,
