@@ -4180,6 +4180,16 @@
       "timestamp": 1762607296619,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "38fa59d5-fe69-4691-abed-6eb511dbf6de",
+      "userId": "a2223112-b98e-4302-8eb2-241d4c3e2a1e",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "[CLOSE_CHAT]",
+      "timestamp": 1762607313590,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
