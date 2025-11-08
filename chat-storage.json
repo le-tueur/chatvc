@@ -6450,6 +6450,16 @@
       "timestamp": 1762641757358,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "f78843c5-0aeb-4189-8864-9b8118f87ed4",
+      "userId": "b6197453-f02a-4cfd-80a5-9d19d22d36e1",
+      "username": "ad",
+      "role": "ad",
+      "content": "Demain c'est beaucoup trop court",
+      "timestamp": 1762641778530,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
