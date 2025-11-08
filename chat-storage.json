@@ -4430,6 +4430,16 @@
       "timestamp": 1762618662351,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "5d24a419-5b0b-4dcf-9175-d8ed626e3e76",
+      "userId": "system",
+      "username": "pronBOTE",
+      "role": "pronBOT",
+      "content": "Chat fermé dans 1 m",
+      "timestamp": 1762619437233,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
@@ -4443,6 +4453,7 @@
     "enabled": true,
     "cooldown": 0,
     "simulationMode": false,
-    "directChatEnabled": true
+    "directChatEnabled": true,
+    "timerEndTime": 1762619497233
   }
 }
