@@ -4110,6 +4110,26 @@
       "timestamp": 1762607023147,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "78b5fc64-c417-474b-a842-24757528f380",
+      "userId": "a2223112-b98e-4302-8eb2-241d4c3e2a1e",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "ferme le chat",
+      "timestamp": 1762607071090,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "277a98dd-9eeb-47fe-b4a2-4b8487738e3c",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Le chat est maintenant fermé. Si vous avez des questions ou besoin d'aide, vous pouvez me contacter à nouveau plus tard. Merci pour votre compréhension !",
+      "timestamp": 1762607072060,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
