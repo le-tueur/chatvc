@@ -4190,6 +4190,16 @@
       "timestamp": 1762607313590,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "f4aef6f6-337f-4d0f-b12f-e64aa1f0c5b2",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Salut ! Je suis pronBOT, l'assistant IA pour l'administrateur. Je suis joyeux, bavard et collaboratif. J'ai toujours le plaisir de vous aider. En tant qu'administrateur, je peux exécuter toutes les actions demandées : modération, fermeture du chat, gestion du timer, etc.\n\nPour fermer le chat, veuillez utiliser la commande [CLOSE_CHAT]. Si vous avez d'autres besoins ou questions, ne hésitez pas à me les poser.",
+      "timestamp": 1762607315936,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
