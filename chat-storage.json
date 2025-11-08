@@ -7730,6 +7730,16 @@
       "timestamp": 1762643965164,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "b2c30df2-4e03-477d-bc01-b35387b73621",
+      "userId": "7be32cb1-94f8-487b-b9a3-0f97f7dcb7e9",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "mise en sourdine durée indéterminée",
+      "timestamp": 1762643975198,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
