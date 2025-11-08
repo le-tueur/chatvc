@@ -4110,6 +4110,16 @@
       "timestamp": 1762619497970,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "7a3465f1-f79c-4a27-bcd8-be4bd617c4ae",
+      "userId": "system",
+      "username": "pronBOTE",
+      "role": "pronBOT",
+      "content": "🔓 Chat ouvert par le bot.",
+      "timestamp": 1762619590090,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
@@ -4120,7 +4130,7 @@
   ],
   "blockedWords": [],
   "config": {
-    "enabled": false,
+    "enabled": true,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
