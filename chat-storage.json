@@ -4200,6 +4200,26 @@
       "timestamp": 1762639387806,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "9f2a95da-8334-402d-8574-b6115e60b4f7",
+      "userId": "7fdb6111-ddac-458c-b75c-4f0042033d76",
+      "username": "ad",
+      "role": "ad",
+      "content": "Pronbot ta gorge",
+      "timestamp": 1762639393843,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "5a5e9ded-28ce-4215-80b4-523479535fb2",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639393844,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
