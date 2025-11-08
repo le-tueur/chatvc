@@ -3890,14 +3890,29 @@
       "timestamp": 1762633549835,
       "status": "approved",
       "type": "normal"
-    }
-  ],
-  "mutedUsers": [
+    },
     {
+      "id": "2c93c2a4-094d-41a7-aa8a-43314d0947dc",
+      "userId": "db47ee6c-c4db-48c3-8558-c5f16c1c3c82",
       "username": "shainez",
-      "mutedUntil": 1762639241182
+      "role": "shainez",
+      "content": "Ad ???",
+      "timestamp": 1762639243339,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "c6603cde-e9b7-4aa9-b265-812860567c02",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639243340,
+      "status": "approved",
+      "type": "normal"
     }
   ],
+  "mutedUsers": [],
   "blockedWords": [],
   "config": {
     "enabled": true,
