@@ -6810,12 +6810,32 @@
       "timestamp": 1762643199385,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "459bf24f-776d-45fb-81ec-1e0e671c996d",
+      "userId": "910a674c-0522-4b00-aea7-dba06d7441e5",
+      "username": "ad",
+      "role": "ad",
+      "content": "Même si on ne se voit pas je penserai à toi à chaque instant. Tu seras toujours dans mon cœur",
+      "timestamp": 1762643248788,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "2367c9db-635c-484d-880d-c7af238320f4",
+      "userId": "bot-pronbote",
+      "username": "Système",
+      "role": "pronbote",
+      "content": "⚠️ Chat fermé automatiquement - Mention de messagerie privée détectée (ad)",
+      "timestamp": 1762643248789,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
