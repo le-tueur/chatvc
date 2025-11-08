@@ -4720,6 +4720,26 @@
       "timestamp": 1762639694589,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "2e5e46ba-5177-4cae-9c4d-1b2ac234a6f9",
+      "userId": "1bfb837a-3004-45b9-a300-1af99bd7bf5b",
+      "username": "ad",
+      "role": "ad",
+      "content": "Je pense il a fait exprès de mettre le pronbote car j'ai pas pue le payer",
+      "timestamp": 1762639711422,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "7475f223-77b7-44ff-a683-e56f28725c95",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639711423,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
