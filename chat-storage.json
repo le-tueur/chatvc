@@ -4420,6 +4420,26 @@
       "timestamp": 1762639491013,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "a84ae8e6-e703-46e2-aa4b-2989f794cf87",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Stop prombot tu peux nous laisser seul",
+      "timestamp": 1762639505225,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "5fa878fe-825b-427b-b0ff-4f902fce4d10",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639505225,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
