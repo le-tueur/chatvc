@@ -6520,6 +6520,17 @@
       "timestamp": 1762641945173,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "3c16d25d-deec-43d3-835f-2844102548e2",
+      "userId": "7f88ef9e-d2ce-4aaa-92f4-bc6f4fefafd3",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "sourdines terminé.",
+      "timestamp": 1762642056433,
+      "status": "approved",
+      "type": "flash",
+      "flashDuration": 5
     }
   ],
   "mutedUsers": [],
