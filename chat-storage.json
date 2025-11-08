@@ -6690,6 +6690,16 @@
       "timestamp": 1762642838617,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "99e99312-6782-4722-b867-fc0a20725c30",
+      "userId": "f0a3be8d-7faf-4673-b1b7-75bc518aad5d",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "fermeture dans 50 secondes!",
+      "timestamp": 1762642922920,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
