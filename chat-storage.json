@@ -7420,6 +7420,16 @@
       "timestamp": 1762643629310,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "c06277b2-57c7-4ef7-9c9e-042d56dd75e7",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "De lui donner son argent",
+      "timestamp": 1762643636434,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
