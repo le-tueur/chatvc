@@ -4160,6 +4160,16 @@
       "timestamp": 1762607155171,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "77685079-5719-47be-ba5a-0cc53d0ce1fa",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " [CLOSE_CHAT] Le chat va être immédiatement fermé, merci de votre compréhension !",
+      "timestamp": 1762607227270,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
@@ -4174,7 +4184,7 @@
   ],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
