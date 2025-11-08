@@ -7770,6 +7770,16 @@
       "timestamp": 1762643995578,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "c82e29c5-9bfa-4e16-b157-88b3c6d0503d",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Le lundi samedi et vendredi",
+      "timestamp": 1762644002977,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
