@@ -4200,6 +4200,16 @@
       "timestamp": 1762607315936,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "c5f881d1-a6b1-46ab-ab7e-7f7cb0186f82",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " [REJECT] En tant qu'assistant IA modérateur, je ne peux pas démuter les utilisateurs. Cela doit être fait par un administrateur humain.",
+      "timestamp": 1762607448093,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
