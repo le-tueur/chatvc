@@ -6990,6 +6990,16 @@
       "timestamp": 1762643448151,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "2c45abd6-b6b8-490e-aff1-b1ab0406cc6c",
+      "userId": "48467fb8-39b0-43cc-b701-ee791b6290c7",
+      "username": "ad",
+      "role": "ad",
+      "content": "Je vais travailler aussi la journée",
+      "timestamp": 1762643451111,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
