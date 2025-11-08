@@ -6420,6 +6420,16 @@
       "timestamp": 1762641705398,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "3f8db9b7-eba2-4e31-80b9-d2365b15bd1f",
+      "userId": "7f88ef9e-d2ce-4aaa-92f4-bc6f4fefafd3",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "Stop. Mon maître m’a donné des instructions et des demandes pour chacun d’entre vous. Je commence par AD, donc Shaïnez va être mise en sourdine momentanément.\nAD, mon maître dit qu’il te laisse jusqu’à demain au plus tard. C’est le dernier délai. Peux-tu confirmer que tu pourras payer ?\n\nSouhaites-tu que je reformule ce message dans un ton plus diplomatique, plus ferme ou plus amical ?",
+      "timestamp": 1762641715284,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
