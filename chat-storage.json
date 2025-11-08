@@ -6520,16 +6520,6 @@
       "timestamp": 1762641945173,
       "status": "approved",
       "type": "normal"
-    },
-    {
-      "id": "d22a215c-7937-4135-8d92-e57aa32ff7c1",
-      "userId": "bot-pronbote",
-      "username": "pronbote",
-      "role": "pronbote",
-      "content": "OK.",
-      "timestamp": 1762641945174,
-      "status": "approved",
-      "type": "normal"
     }
   ],
   "mutedUsers": [
