@@ -4150,6 +4150,16 @@
       "timestamp": 1762607089311,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "4f8efb70-178f-40b4-9147-addb9ffd6903",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " [CLOSE_CHAT en 10 secondes] - Le chat va être fermé après dix secondes, merci de revenir plus tard ! 🎉🌙",
+      "timestamp": 1762607155171,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
