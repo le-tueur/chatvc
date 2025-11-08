@@ -4360,6 +4360,16 @@
       "timestamp": 1762616690635,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "9a8c610d-0964-4bd9-a702-3435d830d111",
+      "userId": "ee6f1706-3e2f-466b-996b-5e5381a433e0",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "insulte détecter tu seras bannis a la prochaine!",
+      "timestamp": 1762616721440,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
