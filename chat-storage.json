@@ -4170,6 +4170,36 @@
       "timestamp": 1762639376418,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "eaf91919-1951-430e-996b-dff372f3c0f0",
+      "userId": "229d10f9-b7a6-46b5-926d-b20cbdcc48a2",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "Par contre faux que ils arrêt le bot",
+      "timestamp": 1762639387805,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "233bb912-ad21-4b2f-baa8-d607f5edd64b",
+      "userId": "bot-pronbote",
+      "username": "Système",
+      "role": "pronbote",
+      "content": "⚠️ Message de shainez bloqué pour contenu inapproprié",
+      "timestamp": 1762639387806,
+      "status": "approved",
+      "type": "event"
+    },
+    {
+      "id": "9cc08c1e-0f96-4e9b-bae0-380844da0015",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "OK.",
+      "timestamp": 1762639387806,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
