@@ -6350,6 +6350,16 @@
       "timestamp": 1762641644060,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "637fd42c-d0a8-4b2c-ac47-45a4c9bf423b",
+      "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "J’ai peur",
+      "timestamp": 1762641654404,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
