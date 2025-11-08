@@ -4170,6 +4170,16 @@
       "timestamp": 1762607227270,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "1cf16b28-0818-479d-83da-7e015bc6bc99",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Je suis désolé, mais comme je n'ai pas de capacité d'actionnellement exécuter des actions telles que \"fermer le chat\" après un certain délai. Cependant, je peux vous donner une alerte précédant la fermeture future du chat :\n\nAttention, le chat sera fermé dans 1 minute. Merci de sauvegarder vos discussions avant sa fermeture.",
+      "timestamp": 1762607296619,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
