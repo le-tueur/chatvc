@@ -4930,12 +4930,22 @@
       "timestamp": 1762640235162,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "da22f988-d063-4999-bcbb-aaf51885bee2",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": "[CLOSE_CHAT]",
+      "timestamp": 1762640250858,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [],
   "blockedWords": [],
   "config": {
-    "enabled": true,
+    "enabled": false,
     "cooldown": 0,
     "simulationMode": false,
     "directChatEnabled": true
