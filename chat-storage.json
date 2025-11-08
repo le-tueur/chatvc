@@ -7250,6 +7250,16 @@
       "timestamp": 1762643538266,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "68623c5d-1339-4fc2-b21a-58459319da58",
+      "userId": "464dc4ea-5305-4931-b22d-e96f205fc937",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "fermeture!",
+      "timestamp": 1762643542230,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
