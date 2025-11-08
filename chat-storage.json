@@ -4120,12 +4120,26 @@
       "timestamp": 1762619590090,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "c1e01238-5d1f-4beb-9a80-957de17fc03e",
+      "userId": "system",
+      "username": "pronBOTE",
+      "role": "pronBOT",
+      "content": "🔇 @ad banni pour 60 minutes.",
+      "timestamp": 1762619604147,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [
     {
       "username": "shainez",
       "mutedUntil": 1762639241182
+    },
+    {
+      "username": "ad",
+      "mutedUntil": 1762623204147
     }
   ],
   "blockedWords": [],
