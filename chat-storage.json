@@ -4290,6 +4290,16 @@
       "timestamp": 1762607535054,
       "status": "approved",
       "type": "normal"
+    },
+    {
+      "id": "a675eb63-55a8-4553-bf69-66d54b2d4c33",
+      "userId": "bot-pronbote",
+      "username": "pronbote",
+      "role": "pronbote",
+      "content": " Bonjour ! 🌞 Ce n'est pas moi, mais l'assistant moderateur pronBOT qui parle ! Je suis heureux de vous rencontrer.",
+      "timestamp": 1762608206501,
+      "status": "approved",
+      "type": "normal"
     }
   ],
   "mutedUsers": [
