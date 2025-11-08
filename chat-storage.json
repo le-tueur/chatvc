@@ -6262,17 +6262,6 @@
       "type": "normal"
     },
     {
-      "id": "9d1e852d-1810-4737-ba47-7ae247112df6",
-      "userId": "7f88ef9e-d2ce-4aaa-92f4-bc6f4fefafd3",
-      "username": "pronBOT",
-      "role": "pronBOT",
-      "content": "évènements spécial dans 15 secondes",
-      "timestamp": 1762641588568,
-      "status": "approved",
-      "type": "flash",
-      "flashDuration": 15
-    },
-    {
       "id": "5aff1085-3623-49ab-8e69-ebab565462a0",
       "userId": "7fbb6fe6-a79e-4527-a76d-8d8743180189",
       "username": "shainez",
