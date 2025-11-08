@@ -7180,6 +7180,26 @@
       "timestamp": 1762643518080,
       "status": "approved",
       "type": "event"
+    },
+    {
+      "id": "57116a5b-7427-41ed-b96f-a24532de9072",
+      "userId": "6d6d75f6-0801-46d8-b9d0-29989d66c9bf",
+      "username": "shainez",
+      "role": "shainez",
+      "content": "On s’arrange pour l’argent",
+      "timestamp": 1762643523173,
+      "status": "approved",
+      "type": "normal"
+    },
+    {
+      "id": "cfe249c3-e1e4-4cd9-94dd-d1661540b7b6",
+      "userId": "464dc4ea-5305-4931-b22d-e96f205fc937",
+      "username": "pronBOT",
+      "role": "pronBOT",
+      "content": "fermeture!",
+      "timestamp": 1762643523930,
+      "status": "approved",
+      "type": "event"
     }
   ],
   "mutedUsers": [],
